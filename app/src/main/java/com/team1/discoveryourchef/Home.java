@@ -51,8 +51,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        //String fullName = getIntent().getExtras().getString("fullName");
+        String fullName = getIntent().getExtras().getString("fullName");
         welcome = findViewById(R.id.welcome);
+        welcome.setText("Welcome " + fullName);
 
         //Create the loading window//
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
