@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DiscoverYourChef</string>
+    <string name="setCerealClickName">Cereals</string>
+    <string name="setBreadClickName">Breads</string>
+    <string name="setStarterClickName">Starter Food</string>
+    <string name="setSideClickName">Side Dishes</string>
+    <string name="setSoupsClickName">Soups</string>
+    <string name="setMainCourseClickName">Main Course</string>
+    <string name="setPancakesClickName">Pancakes</string>
+    <string name="setSweetsClickName">Sweets</string>
 </resources>

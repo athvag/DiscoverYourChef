@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Design.NoActionBar">
         <activity
             android:name=".Home"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".Register"
             android:exported="false" />
