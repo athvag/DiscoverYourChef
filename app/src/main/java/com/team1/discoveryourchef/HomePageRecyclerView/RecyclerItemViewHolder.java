@@ -13,11 +13,11 @@ import com.team1.discoveryourchef.R;
 public class RecyclerItemViewHolder extends RecyclerView.ViewHolder{
 
 
+    private RecyclerCallback callback;
 
-
-    public RecyclerItemViewHolder(@NonNull View itemView) {
+    public RecyclerItemViewHolder(@NonNull View itemView,RecyclerCallback listener) {
         super(itemView);
-
+        callback = listener;
 
 
     }
@@ -34,6 +34,13 @@ public class RecyclerItemViewHolder extends RecyclerView.ViewHolder{
         food_name.setText(name);
         food_calories.setText(calories.toString()+" Calories");
         food_desc.setText(ingredients);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onItemClicked(v,name,calories,image,ingredients);
+            }
+        });
 
     }
 }
