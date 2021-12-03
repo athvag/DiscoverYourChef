@@ -112,6 +112,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         recyclerView.setLayoutManager(gridLayoutManager);
     }
 
+    //Basic function to handle the recipe load
+
     private void loadRecipies(String queue) {
 
         String tempUrl = "";
@@ -126,6 +128,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
 
                 //For every JSON object found, add its name,calories,ingredients and image to an array//
+                //The Lists names,calories,ingredients,images will include all the data//
+                //Use them for intents//
                 for (int i = 0; i < jsonResponse.getHits().size(); i++) {
                     names.add(jsonResponse.getHits().get(i).getRecipe().getLabel());
                     int a = (int) Math.round(jsonResponse.getHits().get(i).getRecipe().getCalories());
@@ -169,45 +173,35 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) { //Handle the clicks of the Category items//
         switch (v.getId()) {
             case R.id.cat_menu_1:
-                clearLast();
-                foodLabel.setText(R.string.setStarterClickName);
-                loadRecipies("&dishType=Starter");
+                refreshView("Starter Food","&dishType=Starter");
                 break;
             case R.id.cat_menu_2:
-                clearLast();
-                foodLabel.setText(R.string.setBreadClickName);
-                loadRecipies("&dishType=Bread");
+                refreshView("Breads","&dishType=Bread");
                 break;
             case R.id.cat_menu_3:
-                clearLast();
-                foodLabel.setText(R.string.setCerealClickName);
-                loadRecipies("&dishType=Cereals");
+                refreshView("Cereals","&dishType=Cereals");
                 break;
             case R.id.cat_menu_4:
-                clearLast();
-                foodLabel.setText(R.string.setSideClickName);
-                loadRecipies("&dishType=Side Disk");
+                refreshView("Side Dishes","&dishType=Side Disk");
                 break;
             case R.id.cat_menu_5:
-                clearLast();
-                foodLabel.setText(R.string.setSoupsClickName);
-                loadRecipies("&dishType=Soup");
+                refreshView("Soups","&dishType=Soup");
                 break;
             case R.id.cat_menu_6:
-                clearLast();
-                foodLabel.setText(R.string.setMainCourseClickName);
-                loadRecipies("&dishType=Main Course");
+                refreshView("Main Course","&dishType=Main Course");
                 break;
             case R.id.cat_menu_7:
-                clearLast();
-                foodLabel.setText(R.string.setPancakesClickName);
-                loadRecipies("&dishType=Pancakes");
+                refreshView("Pancakes","&dishType=Pancakes");
                 break;
             case R.id.cat_menu_8:
-                clearLast();
-                foodLabel.setText(R.string.setSweetsClickName);
-                loadRecipies("&dishType=Sweets");
+                refreshView("Sweets","&dishType=Sweets");
                 break;
         }
+    }
+
+    private void refreshView(String food_type, String s) {
+        clearLast();
+        foodLabel.setText(food_type);
+        loadRecipies(s);
     }
 }

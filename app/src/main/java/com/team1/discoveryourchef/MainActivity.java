@@ -35,13 +35,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAuth = FirebaseAuth.getInstance();
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent login = new Intent(MainActivity.this,Home.class);
+            DocumentReference user = db.collection("Users").document(currentUser.getUid());
+            user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    DocumentSnapshot document = task.getResult();
+                    login.putExtra("fullName", document.getString("fullName"));
+                    startActivity(login);
+                }
+            });
+        }
+        else{
+
+        }
+    }
+
+
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        mAuth = FirebaseAuth.getInstance();
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);

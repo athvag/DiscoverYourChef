@@ -29,10 +29,8 @@ public class RecyclerItemViewHolder extends RecyclerView.ViewHolder{
         TextView food_desc = itemView.findViewById(R.id.food1_desc);
         ImageView food_image = itemView.findViewById(R.id.food1_image);
 
-
-        Picasso.get().load(image)
-                .into(food_image);
-
+        /** Bind the data to the views **/
+        Picasso.get().load(image).placeholder(R.drawable.defaultfood).fit().into(food_image);
         food_name.setText(name);
         food_calories.setText(calories.toString()+" Calories");
         food_desc.setText(ingredients);
