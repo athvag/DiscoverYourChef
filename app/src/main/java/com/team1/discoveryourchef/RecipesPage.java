@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,13 +20,19 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerCallback;
+import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerAdapter2;
 import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerCallback2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipesPage extends AppCompatActivity implements View.OnClickListener, RecyclerCallback2 {
 
     TextView recipeName, recipeCalories;
     ImageView backButton, favourite, recipePhoto;
     private FirebaseAuth mAuth;
+    RecyclerView recyclerView;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -75,6 +82,17 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
 
             }
         });
+
+        recyclerView = findViewById(R.id.recycler_menu2);
+
+        List<String> arrayIngredients = new ArrayList<>();
+        String[] separated = recipe_ingredients.split(",");
+
+        for (int i=0; i <= separated.length; i++) {
+            arrayIngredients.add(separated[i]);
+        }
+        RecyclerAdapter2 adapter2 = new RecyclerAdapter2(arrayIngredients, (RecyclerCallback) this);
+        recyclerView.setAdapter(adapter2);
 
 
     }
