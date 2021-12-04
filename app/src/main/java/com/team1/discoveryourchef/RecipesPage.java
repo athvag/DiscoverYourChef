@@ -19,8 +19,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerCallback2;
 
-public class RecipesPage extends AppCompatActivity {
+public class RecipesPage extends AppCompatActivity implements View.OnClickListener, RecyclerCallback2 {
 
     TextView recipeName, recipeCalories;
     ImageView backButton, favourite, recipePhoto;
@@ -77,4 +78,15 @@ public class RecipesPage extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onItemClicked(View view, String ingredients) {
+
+    }
+
 }
