@@ -213,12 +213,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     @Override
     public void onItemClicked(View view, String name, int calories, String image, String ingredients) {
         Toast.makeText(this, "Clicked: "+ name + calories + image + ingredients, Toast.LENGTH_SHORT).show();
-//        Intent gotoRecipe = new Intent(Home.this,RecipePage.class);
-//        gotoRecipe.putExtra("recipeName",name);
-//        gotoRecipe.putExtra("recipeCalories",calories);
-//        gotoRecipe.putExtra("recipeImage",image);
-//        gotoRecipe.putExtra("recipeIngredients",ingredients);
-//        startActivity(gotoRecipe);
+        Intent gotoRecipe = new Intent(Home.this,RecipesPage.class);
+        gotoRecipe.putExtra("recipeName",name);
+        gotoRecipe.putExtra("recipeCalories",calories);
+        gotoRecipe.putExtra("recipeImage",image);
+        gotoRecipe.putExtra("recipeIngredients",ingredients);
+        startActivity(gotoRecipe);
 
     }
 }
