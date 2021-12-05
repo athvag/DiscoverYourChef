@@ -13,11 +13,11 @@ import com.team1.discoveryourchef.R;
 
 public class RecyclerItemViewHolder2 extends RecyclerView.ViewHolder {
 
-    private RecyclerCallback2 callback2;
+    private RecyclerCallback2 callback;
 
     public RecyclerItemViewHolder2(@NonNull View itemView, RecyclerCallback2 listener) {
         super(itemView);
-        callback2 = listener;
+        callback = listener;
     }
 
     public void bind(String ingredients) {
@@ -31,7 +31,7 @@ public class RecyclerItemViewHolder2 extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback2.onItemClicked(v, ingredients);
+                callback.onItemClicked(v, ingredients);
             }
         });
     }

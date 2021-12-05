@@ -20,6 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerAdapter;
 import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerCallback;
 import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerAdapter2;
 import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerCallback2;
@@ -88,11 +89,12 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         List<String> arrayIngredients = new ArrayList<>();
         String[] separated = recipe_ingredients.split(",");
 
-        for (int i=0; i <= separated.length; i++) {
+        for (int i=0; i < separated.length; i++) {
             arrayIngredients.add(separated[i]);
         }
-        RecyclerAdapter2 adapter2 = new RecyclerAdapter2(arrayIngredients, (RecyclerCallback) this);
-        recyclerView.setAdapter(adapter2);
+        RecyclerAdapter2 adpt = new RecyclerAdapter2(arrayIngredients, (RecyclerCallback) RecipesPage.this);
+        //RecyclerAdapter2 adapter2 = new RecyclerAdapter2(arrayIngredients, (RecyclerCallback) this);
+        recyclerView.setAdapter(adpt);
 
 
     }
@@ -104,6 +106,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onItemClicked(View view, String ingredients) {
+        Toast.makeText(this, "Clicked: "+ ingredients, Toast.LENGTH_SHORT).show();
 
     }
 
