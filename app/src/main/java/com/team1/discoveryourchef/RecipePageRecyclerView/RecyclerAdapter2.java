@@ -27,7 +27,7 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerItemViewHolde
     @Override
     public RecyclerItemViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_recipe_item, parent, false);
-        return new RecyclerItemViewHolder2(view, (RecyclerCallback2) callback2);
+        return new RecyclerItemViewHolder2(view,callback2);
     }
 
     @Override
@@ -37,6 +37,6 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerItemViewHolde
 
     @Override
     public int getItemCount() {
-        return 0;
+        return ingredients.size();
     }
 }
