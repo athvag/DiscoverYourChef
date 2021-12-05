@@ -37,6 +37,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     List<Integer> calories = new ArrayList<>();
     List<String> ingredients = new ArrayList<>();
     List<String> images = new ArrayList<>();
+    List<String> links = new ArrayList<>();
     RecyclerView recyclerView;
     CardView clickItem1, clickItem2, clickItem3, clickItem4, clickItem5, clickItem6, clickItem7, clickItem8;
     TextView foodLabel;
@@ -138,11 +139,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                     calories.add(a);
                     ingredients.add(jsonResponse.getHits().get(i).getRecipe().getIngredientLines().toString().replaceAll("\\[", "").replaceAll("\\]", ""));
                     images.add(jsonResponse.getHits().get(i).getRecipe().getImage());
+                    links.add(jsonResponse.getHits().get(i).getRecipe().getUrl());
                 }
                 //If there are JSON objects in the query//
                 if (!names.isEmpty()) {
 
-                    RecyclerAdapter adapter = new RecyclerAdapter(names, calories, ingredients, images,Home.this);  //Create a new adapter with the items added above//
+                    RecyclerAdapter adapter = new RecyclerAdapter(names, calories, ingredients, images, links,Home.this);  //Create a new adapter with the items added above//
                     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { //Handle the orientation changes//
                         gridLayoutManager = new GridLayoutManager(Home.this, 2, GridLayoutManager.VERTICAL, false); //This is used to create 2 collumns to the recyclerview//
 
@@ -211,13 +213,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     //On every item click send data to recipe activity//
     //Uncomment the next lines and add your class to the intent//
     @Override
-    public void onItemClicked(View view, String name, int calories, String image, String ingredients) {
+    public void onItemClicked(View view, String name, int calories, String image, String ingredients, String links) {
         Toast.makeText(this, "Clicked: "+ name + calories + image + ingredients, Toast.LENGTH_SHORT).show();
         Intent gotoRecipe = new Intent(Home.this,RecipesPage.class);
         gotoRecipe.putExtra("recipeName",name);
         gotoRecipe.putExtra("recipeCalories",calories);
         gotoRecipe.putExtra("recipeImage",image);
         gotoRecipe.putExtra("recipeIngredients",ingredients);
+        gotoRecipe.putExtra("recipeLink", links);
         startActivity(gotoRecipe);
 
     }

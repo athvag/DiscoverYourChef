@@ -22,12 +22,13 @@ public class RecyclerItemViewHolder extends RecyclerView.ViewHolder{
 
     }
 
-    public void bind(String name, Integer calories, String ingredients,String image){
+    public void bind(String name, Integer calories, String ingredients,String image, String links){
 
         TextView food_name = itemView.findViewById(R.id.food1_name_header);
         TextView food_calories = itemView.findViewById(R.id.food1_cal_header);
         TextView food_desc = itemView.findViewById(R.id.food1_desc);
         ImageView food_image = itemView.findViewById(R.id.food1_image);
+
 
         /** Bind the data to the views **/
         Picasso.get().load(image).placeholder(R.drawable.defaultfood).fit().into(food_image);
@@ -38,7 +39,7 @@ public class RecyclerItemViewHolder extends RecyclerView.ViewHolder{
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.onItemClicked(v,name,calories,image,ingredients);
+                callback.onItemClicked(v,name,calories,image,ingredients,links);
             }
         });
 

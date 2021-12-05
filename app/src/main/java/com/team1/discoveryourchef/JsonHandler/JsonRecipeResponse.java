@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonRecipeResponse {
-    private String uri;
+    private String url;
     private String label;
     private String image;
     private Double calories;
@@ -14,12 +14,12 @@ public class JsonRecipeResponse {
     public JsonRecipeResponse() {
     }
 
-    public String getUri() {
-        return uri;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getLabel() {
@@ -65,7 +65,7 @@ public class JsonRecipeResponse {
     @Override
     public String toString() {
         return "JsonRecipeResponse{" +
-                "uri='" + uri + '\'' +
+                "uri='" + url + '\'' +
                 ", label='" + label + '\'' +
                 ", image='" + image + '\'' +
                 ", calories=" + calories +

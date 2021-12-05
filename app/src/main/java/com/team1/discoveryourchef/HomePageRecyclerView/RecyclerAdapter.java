@@ -19,13 +19,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<Integer> calories;
     private List<String> ingredients;
     private List<String> images;
+    private List<String> links;
     private RecyclerCallback callback;
 
-    public RecyclerAdapter(List<String> name, List<Integer> calories, List<String> ingredients, List<String> images, RecyclerCallback callback) {
+    public RecyclerAdapter(List<String> name, List<Integer> calories, List<String> ingredients, List<String> images, List<String> links, RecyclerCallback callback) {
         this.name = name;
         this.calories = calories;
         this.ingredients = ingredients;
         this.images = images;
+        this.links = links;
         this.callback =  callback;
     }
 
@@ -38,7 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((RecyclerItemViewHolder) holder).bind(name.get(position),calories.get(position),ingredients.get(position),images.get(position));
+        ((RecyclerItemViewHolder) holder).bind(name.get(position),calories.get(position),ingredients.get(position),images.get(position),links.get(position));
 
 
     }

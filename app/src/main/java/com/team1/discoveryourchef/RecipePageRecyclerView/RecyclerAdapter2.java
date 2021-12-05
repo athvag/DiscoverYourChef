@@ -13,26 +13,26 @@ import com.team1.discoveryourchef.R;
 
 import java.util.List;
 
-public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerItemViewHolder2> {
 
     private List<String> ingredients;
-    private RecyclerCallback callback;
+    private RecyclerCallback2 callback2;
 
-    public RecyclerAdapter2(List<String> ingredients, RecyclerCallback callback) {
+    public RecyclerAdapter2(List<String> ingredients, RecyclerCallback2 callback2) {
         this.ingredients = ingredients;
-        this.callback =  callback;
+        this.callback2 =  callback2;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerItemViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_recipe_item, parent, false);
-        return new RecyclerItemViewHolder2(view, (RecyclerCallback2) callback);
+        return new RecyclerItemViewHolder2(view, (RecyclerCallback2) callback2);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((RecyclerItemViewHolder2) holder).bind(ingredients.get(position));
+    public void onBindViewHolder(@NonNull RecyclerItemViewHolder2 holder, int position) {
+        ( holder).bind(ingredients.get(position));
     }
 
     @Override

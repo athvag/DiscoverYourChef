@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerAdapter;
@@ -34,8 +36,13 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     ImageView backButton, favourite, recipePhoto;
     private FirebaseAuth mAuth;
     RecyclerView recyclerView;
-
+    boolean isFavourite = false;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String recipe_name;
+    String recipe_calories;
+    String recipe_image;
+    String recipe_ingredients;
+    String recipe_link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +54,11 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        String recipe_name = getIntent().getExtras().getString("recipeName");
-        int recipe_calories = getIntent().getExtras().getInt("recipeCalories");
-        String recipe_image = getIntent().getExtras().getString("recipeImage");
-        String recipe_ingredients = getIntent().getExtras().getString("recipeIngredients");
+        recipe_name = getIntent().getExtras().getString("recipeName");
+        recipe_calories = getIntent().getExtras().getString("recipeCalories");
+        recipe_image = getIntent().getExtras().getString("recipeImage");
+        recipe_ingredients = getIntent().getExtras().getString("recipeIngredients");
+        recipe_link = getIntent().getExtras().getString("recipeLink");
 
         backButton = findViewById(R.id.backButton);
         favourite = findViewById(R.id.favouritePhoto);
@@ -68,17 +76,16 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        final boolean[] favouriteRecipe = {false};
-
         favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!favouriteRecipe[0]) {
+                if (!isFavourite) {
                     favourite.setImageDrawable(getResources().getDrawable(R.drawable.favourite));
-                    favouriteRecipe[0] = true;
-                } else if (favouriteRecipe[0]) {
+                    isFavourite = true;
+                    addToFirebase();
+                } else if (isFavourite) {
                     favourite.setImageDrawable(getResources().getDrawable(R.drawable.notfavourite));
-                    favouriteRecipe[0] = false;
+                    isFavourite = false;
                 }
 
             }
@@ -92,11 +99,19 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         for (int i=0; i < separated.length; i++) {
             arrayIngredients.add(separated[i]);
         }
-        RecyclerAdapter2 adpt = new RecyclerAdapter2(arrayIngredients, (RecyclerCallback) RecipesPage.this);
-        //RecyclerAdapter2 adapter2 = new RecyclerAdapter2(arrayIngredients, (RecyclerCallback) this);
-        recyclerView.setAdapter(adpt);
+        RecyclerAdapter2 adapter2 = new RecyclerAdapter2(arrayIngredients,  RecipesPage.this);
+        recyclerView.setAdapter(adapter2);
+    }
 
-
+    private void addToFirebase() {
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        Favourites favourites = new Favourites(recipe_name, recipe_calories, recipe_image, recipe_ingredients, currentFirebaseUser.getUid(), recipe_link);
+        db.collection("Favorites").add(favourites).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+                Toast.makeText(RecipesPage.this, "User has been registered successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
