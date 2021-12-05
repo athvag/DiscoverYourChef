@@ -24,14 +24,16 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesItemViewHold
     private List<String> ingredients;
     private List<String> images;
     private List<String> links;
+    private List<String> recipeID;
     private FavoritesCallback callback;
 
-    public FavoritesAdapter(List<String> name, List<Integer> calories, List<String> ingredients, List<String> images,List<String> links, FavoritesCallback callback) {
+    public FavoritesAdapter(List<String> name, List<Integer> calories, List<String> ingredients, List<String> images,List<String> links,List<String> recipeID, FavoritesCallback callback) {
         this.name = name;
         this.calories = calories;
         this.ingredients = ingredients;
         this.images = images;
         this.links = links;
+        this.recipeID = recipeID;
         this.callback = callback;
     }
 
@@ -44,7 +46,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesItemViewHold
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesItemViewHolder holder, int position) {
-        ((FavoritesItemViewHolder) holder).bind(name.get(position),calories.get(position),ingredients.get(position),images.get(position),links.get(position));
+        ((FavoritesItemViewHolder) holder).bind(name.get(position),calories.get(position),ingredients.get(position),images.get(position),links.get(position),recipeID.get(position));
 
 
     }

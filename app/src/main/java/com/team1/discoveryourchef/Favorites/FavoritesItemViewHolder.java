@@ -26,7 +26,7 @@ public class FavoritesItemViewHolder extends RecyclerView.ViewHolder {
         fav_image = itemView.findViewById(R.id.fav_image);
     }
 
-    public void bind(String name, Integer calories, String ingredients, String image,String link) {
+    public void bind(String name, Integer calories, String ingredients, String image,String link,String recipeID) {
 
         // Bind the data to the views //
         Picasso.get().load(image).placeholder(R.drawable.defaultfood).fit().into(fav_image);
@@ -37,7 +37,7 @@ public class FavoritesItemViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.onItemClicked(v, name, calories, image, ingredients, link);
+                callback.onItemClicked(v, name, calories, image, ingredients, link, true,recipeID);
             }
         });
 

@@ -32,7 +32,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     ImageView backButton, favourite, recipePhoto;
     private FirebaseAuth mAuth;
     RecyclerView recyclerView;
-    boolean isFavourite = false;
+    boolean isFavourite;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String recipe_name;
     int recipe_calories;
@@ -40,6 +40,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     String recipe_ingredients;
     String recipe_link;
     String uniqueID;
+    String recipeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         recipe_image = getIntent().getExtras().getString("recipeImage");
         recipe_ingredients = getIntent().getExtras().getString("recipeIngredients");
         recipe_link = getIntent().getExtras().getString("recipeLink");
+        isFavourite = getIntent().getBooleanExtra("recipeIsFavorite",false);
+        recipeID = getIntent().getExtras().getString("recipeID");
 
         backButton = findViewById(R.id.backButton);
         favourite = findViewById(R.id.favouritePhoto);
@@ -72,6 +75,13 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
                 onBackPressed();
             }
         });
+
+        if(!isFavourite){
+            favourite.setImageDrawable(getResources().getDrawable(R.drawable.notfavourite));
+        }
+        else{
+            favourite.setImageDrawable(getResources().getDrawable(R.drawable.favourite));
+        }
 
         favourite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,12 +113,23 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     }
 
     private void removeFromFirebase() {
-        db.collection("Favorites").document(uniqueID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(RecipesPage.this, "Favorite removed successfully!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if(recipeID != null){
+            db.collection("Favorites").document(recipeID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(RecipesPage.this, "Favorite removed successfully!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else{
+            db.collection("Favorites").document(uniqueID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(RecipesPage.this, "Favorite removed successfully!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 
     }
 

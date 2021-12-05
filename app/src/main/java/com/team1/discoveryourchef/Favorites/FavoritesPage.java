@@ -33,11 +33,14 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
 
     LinearLayoutManager linearLayoutManager;
 
+
     List<String> names = new ArrayList<>();
     List<Integer> calories = new ArrayList<Integer>();
     List<String> ingredients = new ArrayList<>();
     List<String> images = new ArrayList<>();
     List<String> links = new ArrayList<>();
+    List<String> recipeID = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,13 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        names.clear();
+        calories.clear();
+        ingredients.clear();
+        images.clear();
+        links.clear();
+        recipeID.clear();
         createRecyclerView();
-
 
     }
 
@@ -79,10 +87,10 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
                                 images.add(document.getString("recipeImage"));
 
                                 links.add(document.getString("recipeLink"));
-
+                                recipeID.add(document.getId());
 
                             }
-                            favoritesSimpleAdapter = new FavoritesAdapter(names, calories, ingredients, images,links, FavoritesPage.this);
+                            favoritesSimpleAdapter = new FavoritesAdapter(names, calories, ingredients, images,links,recipeID, FavoritesPage.this);
 
                             favoritesSimpleAdapter.notifyDataSetChanged();
 
@@ -101,18 +109,34 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
     }
 
     @Override
-    protected void onResume() {
+    protected void onRestart() {
+        names.clear();
+        calories.clear();
+        ingredients.clear();
+        images.clear();
+        links.clear();
+        recipeID.clear();
+        createRecyclerView();
+        super.onRestart();
+    }
 
-        super.onResume();
+    @Override
+    protected void onPostResume() {
+
+        super.onPostResume();
 
 
     }
 
+    @Override
+    public void onBackPressed() {
+        this.finish();
+        super.onBackPressed();
+
+    }
 
     @Override
     protected void onStart() {
-
-
         super.onStart();
 
 
@@ -120,14 +144,13 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
 
     @Override
     protected void onStop() {
-
         super.onStop();
 
     }
 
     //Decide what happens on each item of the recyclerview clicked
     @Override
-    public void onItemClicked(View view, String name, Integer calories, String image, String ingredients,String links) {
+    public void onItemClicked(View view, String name, Integer calories, String image, String ingredients,String links,Boolean isFavorite,String recipeID) {
         Toast.makeText(this, "Clicked: "+ name + calories + image + ingredients, Toast.LENGTH_SHORT).show();
         Intent gotoRecipe = new Intent(FavoritesPage.this, RecipesPage.class);
         gotoRecipe.putExtra("recipeName",name);
@@ -135,6 +158,8 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
         gotoRecipe.putExtra("recipeImage",image);
         gotoRecipe.putExtra("recipeIngredients",ingredients);
         gotoRecipe.putExtra("recipeLink", links);
+        gotoRecipe.putExtra("recipeIsFavorite",isFavorite);
+        gotoRecipe.putExtra("recipeID",recipeID);
         startActivity(gotoRecipe);
     }
 }
