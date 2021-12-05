@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -100,6 +101,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         for (int i=0; i < separated.length; i++) {
             arrayIngredients.add(separated[i]);
         }
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerAdapter2 adapter2 = new RecyclerAdapter2(arrayIngredients,  RecipesPage.this);
         recyclerView.setAdapter(adapter2);
     }
