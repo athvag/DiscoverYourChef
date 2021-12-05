@@ -30,6 +30,7 @@ import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerCallback2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RecipesPage extends AppCompatActivity implements View.OnClickListener, RecyclerCallback2 {
 
@@ -44,6 +45,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     String recipe_image;
     String recipe_ingredients;
     String recipe_link;
+    String uniqueID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,17 +109,23 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     }
 
     private void removeFromFirebase() {
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("Favorites").document(uniqueID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(RecipesPage.this, "Favorite removed successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
     private void addToFirebase() {
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        uniqueID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
         Favourites favourites = new Favourites(recipe_name, recipe_calories, recipe_image, recipe_ingredients, currentFirebaseUser.getUid(), recipe_link);
-        db.collection("Favorites").add(favourites).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        db.collection("Favorites").document(uniqueID).set(favourites).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                Toast.makeText(RecipesPage.this, "User has been registered successfully", Toast.LENGTH_SHORT).show();
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(RecipesPage.this, "Favorite added successfully!", Toast.LENGTH_SHORT).show();
             }
         });
     }
