@@ -13,6 +13,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.android.volley.Response;
+import com.team1.discoveryourchef.Favorites.FavoritesPage;
 import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerAdapter;
 import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerCallback;
 import com.team1.discoveryourchef.JsonHandler.JsonResponse;
@@ -43,6 +45,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     TextView foodLabel;
     AlertDialog dialog;
     GridLayoutManager gridLayoutManager;
+    ImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         String fullName = getIntent().getExtras().getString("fullName");
         welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome " + fullName);
-
+        profile = findViewById(R.id.account_circle);
         //Create the loading window//
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -92,6 +95,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         //Load random pizza recipies//
         loadRecipies("&q=pizza");
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, FavoritesPage.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void clearLast() {

@@ -13,6 +13,9 @@
             android:name=".RecipesPage"
             android:exported="false" />
         <activity
+            android:name=".Favorites.FavoritesPage"
+            android:exported="false" />
+        <activity
             android:name=".Home"
             android:configChanges="orientation|screenSize"
             android:exported="false" />

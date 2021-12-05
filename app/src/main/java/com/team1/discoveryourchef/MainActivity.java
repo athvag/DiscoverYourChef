@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.team1.discoveryourchef.Favorites.FavoritesPage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         //
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent login = new Intent(MainActivity.this,Home.class);
+            Intent login = new Intent(MainActivity.this, Home.class);
             DocumentReference user = db.collection("Users").document(currentUser.getUid());
             user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override

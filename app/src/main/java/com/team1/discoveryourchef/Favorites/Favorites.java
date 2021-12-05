@@ -1,14 +1,14 @@
-package com.team1.discoveryourchef;
+package com.team1.discoveryourchef.Favorites;
 
-public class Favourites {
+public class Favorites {
 
     private String recipeName,  recipeImage, recipeLink, userId, recipeIngredients;
     private int recipeCalories;
 
-    public Favourites() {
+    public Favorites() {
     }
 
-    public Favourites(String recipeName, int recipeCalories, String recipeImage, String recipeIngredients, String userId, String recipeLink) {
+    public Favorites(String recipeName, int recipeCalories, String recipeImage, String recipeIngredients, String userId, String recipeLink) {
         this.recipeName = recipeName;
         this.recipeCalories = recipeCalories;
         this.recipeImage = recipeImage;

@@ -3,12 +3,9 @@ package com.team1.discoveryourchef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,15 +14,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.protobuf.StringValue;
 import com.squareup.picasso.Picasso;
-import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerAdapter;
-import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerCallback;
+import com.team1.discoveryourchef.Favorites.Favorites;
 import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerAdapter2;
 import com.team1.discoveryourchef.RecipePageRecyclerView.RecyclerCallback2;
 
@@ -122,7 +115,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     private void addToFirebase() {
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         uniqueID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-        Favourites favourites = new Favourites(recipe_name, recipe_calories, recipe_image, recipe_ingredients, currentFirebaseUser.getUid(), recipe_link);
+        Favorites favourites = new Favorites(recipe_name, recipe_calories, recipe_image, recipe_ingredients, currentFirebaseUser.getUid(), recipe_link);
         db.collection("Favorites").document(uniqueID).set(favourites).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

@@ -43,7 +43,7 @@
         android:layout_marginRight="16dp"
         android:gravity="fill_horizontal"
         android:autoSizeTextType="uniform"
-        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="packed"
         android:lines="2"
         android:text="Recipe name"
         android:textSize="18dp"
