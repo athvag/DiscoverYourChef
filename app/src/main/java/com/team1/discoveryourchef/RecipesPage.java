@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.protobuf.StringValue;
 import com.squareup.picasso.Picasso;
 import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerAdapter;
 import com.team1.discoveryourchef.HomePageRecyclerView.RecyclerCallback;
@@ -41,7 +42,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     boolean isFavourite = false;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String recipe_name;
-    String recipe_calories;
+    int recipe_calories;
     String recipe_image;
     String recipe_ingredients;
     String recipe_link;
@@ -58,7 +59,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         super.onPostCreate(savedInstanceState);
 
         recipe_name = getIntent().getExtras().getString("recipeName");
-        recipe_calories = getIntent().getExtras().getString("recipeCalories");
+        recipe_calories = getIntent().getExtras().getInt("recipeCalories");
         recipe_image = getIntent().getExtras().getString("recipeImage");
         recipe_ingredients = getIntent().getExtras().getString("recipeIngredients");
         recipe_link = getIntent().getExtras().getString("recipeLink");

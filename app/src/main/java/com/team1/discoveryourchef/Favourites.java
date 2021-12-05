@@ -2,12 +2,13 @@ package com.team1.discoveryourchef;
 
 public class Favourites {
 
-    private String recipeName, recipeCalories, recipeImage, recipeLink, userId, recipeIngredients;
+    private String recipeName,  recipeImage, recipeLink, userId, recipeIngredients;
+    private int recipeCalories;
 
     public Favourites() {
     }
 
-    public Favourites(String recipeName, String recipeCalories, String recipeImage, String recipeIngredients, String userId, String recipeLink) {
+    public Favourites(String recipeName, int recipeCalories, String recipeImage, String recipeIngredients, String userId, String recipeLink) {
         this.recipeName = recipeName;
         this.recipeCalories = recipeCalories;
         this.recipeImage = recipeImage;
@@ -25,11 +26,11 @@ public class Favourites {
         this.recipeName = recipeName;
     }
 
-    public String getRecipeCalories() {
+    public int getRecipeCalories() {
         return recipeCalories;
     }
 
-    public void setRecipeCalories(String recipeCalories) {
+    public void setRecipeCalories(int recipeCalories) {
         this.recipeCalories = recipeCalories;
     }
 
