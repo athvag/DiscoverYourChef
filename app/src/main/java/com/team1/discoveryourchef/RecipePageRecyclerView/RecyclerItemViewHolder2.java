@@ -22,7 +22,7 @@ public class RecyclerItemViewHolder2 extends RecyclerView.ViewHolder {
 
     public void bind(String ingredients) {
 
-        TextView food_desc = itemView.findViewById(R.id.food1_desc);
+        TextView food_desc = itemView.findViewById(R.id.recipe_ingredient);
 
 
         /** Bind the data to the views **/

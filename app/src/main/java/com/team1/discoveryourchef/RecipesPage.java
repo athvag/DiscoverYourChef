@@ -86,6 +86,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
                 } else if (isFavourite) {
                     favourite.setImageDrawable(getResources().getDrawable(R.drawable.notfavourite));
                     isFavourite = false;
+                    removeFromFirebase();
                 }
 
             }
@@ -103,8 +104,13 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         recyclerView.setAdapter(adapter2);
     }
 
+    private void removeFromFirebase() {
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+    }
+
     private void addToFirebase() {
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Favourites favourites = new Favourites(recipe_name, recipe_calories, recipe_image, recipe_ingredients, currentFirebaseUser.getUid(), recipe_link);
         db.collection("Favorites").add(favourites).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
