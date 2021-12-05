@@ -87,12 +87,13 @@
         android:textSize="22dp"
         android:maxLines = "1"
         android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@id/constraint_layout1"
         app:layout_constraintTop_toBottomOf="@id/recipePhoto"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_layout"
+        android:id="@+id/constraint_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
