@@ -1,445 +1,481 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:fitsSystemWindows="true"
+    tools:context=".Home"
+    tools:openDrawer="start">
 
-    android:background="@drawable/background">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/account_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:scaleX="2"
-            android:scaleY="2"
-            app:layout_constraintBottom_toTopOf="@id/categories_header"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            android:src="@drawable/ic_baseline_account_circle_24"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/welcome"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#000000" />
-
-        <TextView
-            android:id="@+id/welcome"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:text="Welcome"
-            android:gravity="center"
-            android:textSize="26sp"
-            android:maxLines = "1"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMinTextSize="12sp"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeStepGranularity="2sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
-
-        <ImageView
-            android:id="@+id/search_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="26dp"
-
-            android:src="@drawable/search2"
-            app:layout_constraintLeft_toRightOf="@id/welcome"
-            app:layout_constraintRight_toRightOf="parent"
-
-            app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-        <TextView
-            android:id="@+id/categories_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="36dp"
-
-            android:text="Categories"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@id/cat_menu_1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/account_circle"></TextView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_1"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/cat_menu_5"
-            app:layout_constraintRight_toLeftOf="@id/cat_menu_2"
-            app:layout_constraintTop_toBottomOf="@id/categories_header">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat1_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Starter"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_2"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintLeft_toRightOf="@id/cat_menu_1"
-            app:layout_constraintRight_toLeftOf="@id/cat_menu_3"
-            app:layout_constraintTop_toTopOf="@id/cat_menu_1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon2"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat2_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Bread"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_3"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintLeft_toRightOf="@id/cat_menu_2"
-            app:layout_constraintRight_toLeftOf="@id/cat_menu_4"
-            app:layout_constraintTop_toTopOf="@id/cat_menu_2">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon3"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat3_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Cereals"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_4"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="16dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintLeft_toRightOf="@id/cat_menu_3"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cat_menu_3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon4"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat4_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Side Dish"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_5"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@id/food_header"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/cat_menu_6"
-            app:layout_constraintTop_toBottomOf="@id/cat_menu_1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon5"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat5_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Soup"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_6"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintLeft_toRightOf="@id/cat_menu_5"
-            app:layout_constraintRight_toLeftOf="@id/cat_menu_7"
-            app:layout_constraintTop_toTopOf="@id/cat_menu_5">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon6"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat6_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:inputType="text"
-                    android:text="Main Course"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_7"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintLeft_toRightOf="@id/cat_menu_6"
-            app:layout_constraintRight_toLeftOf="@id/cat_menu_8"
-            app:layout_constraintTop_toTopOf="@id/cat_menu_6">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon7"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat7_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Pancakes"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cat_menu_8"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="16dp"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintLeft_toRightOf="@id/cat_menu_7"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cat_menu_7">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foodicon8"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_food"></ImageView>
-
-                <TextView
-
-                    android:id="@+id/cat8_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/foodicon"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Sweets"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <TextView
-            android:id="@+id/food_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toTopOf="@id/constraint_layout"
-            android:text="Food"
-            android:textSize="22sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cat_menu_5"></TextView>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_layout"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintTop_toBottomOf="@id/food_header"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            android:layout_height="match_parent"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_menu"
+            android:background="@drawable/background">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/account_circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:scaleX="2"
+                    android:scaleY="2"
+                    app:layout_constraintBottom_toTopOf="@id/categories_header"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/welcome"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:tint="#000000" />
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="Welcome"
+                android:gravity="center"
+                android:textSize="26sp"
+                android:maxLines = "1"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeStepGranularity="2sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="26dp"
+
+                android:src="@drawable/search2"
+                app:layout_constraintLeft_toRightOf="@id/welcome"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+            <TextView
+                android:id="@+id/categories_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="36dp"
+
+                android:text="Categories"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@id/cat_menu_1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/account_circle"></TextView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_1"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/cat_menu_5"
+                app:layout_constraintRight_toLeftOf="@id/cat_menu_2"
+                app:layout_constraintTop_toBottomOf="@id/categories_header">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat1_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        android:text="Starter"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_2"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintLeft_toRightOf="@id/cat_menu_1"
+                app:layout_constraintRight_toLeftOf="@id/cat_menu_3"
+                app:layout_constraintTop_toTopOf="@id/cat_menu_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat2_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        android:text="Bread"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_3"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintLeft_toRightOf="@id/cat_menu_2"
+                app:layout_constraintRight_toLeftOf="@id/cat_menu_4"
+                app:layout_constraintTop_toTopOf="@id/cat_menu_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat3_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        android:text="Cereals"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_4"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="16dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintLeft_toRightOf="@id/cat_menu_3"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cat_menu_3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat4_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        android:text="Side Dish"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_5"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toTopOf="@id/food_header"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/cat_menu_6"
+                app:layout_constraintTop_toBottomOf="@id/cat_menu_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat5_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        android:text="Soup"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_6"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintLeft_toRightOf="@id/cat_menu_5"
+                app:layout_constraintRight_toLeftOf="@id/cat_menu_7"
+                app:layout_constraintTop_toTopOf="@id/cat_menu_5">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat6_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:inputType="text"
+                        android:text="Main Course"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_7"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintLeft_toRightOf="@id/cat_menu_6"
+                app:layout_constraintRight_toLeftOf="@id/cat_menu_8"
+                app:layout_constraintTop_toTopOf="@id/cat_menu_6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon7"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat7_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        android:text="Pancakes"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_menu_8"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="16dp"
+                app:cardBackgroundColor="@color/secondary"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintLeft_toRightOf="@id/cat_menu_7"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cat_menu_7">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foodicon8"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_food"></ImageView>
+
+                    <TextView
+
+                        android:id="@+id/cat8_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/foodicon"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        android:text="Sweets"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/food_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toTopOf="@id/constraint_layout"
+                android:text="Food"
+                android:textSize="22sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cat_menu_5"></TextView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/food_header"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
+
+    </FrameLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/nav_view"
+        android:theme="@style/ThemeToolbar.NavigationView"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_menu"
+        android:background="@color/navcolor"
+        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/black" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
+
+

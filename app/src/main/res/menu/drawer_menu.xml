@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <item android:title="">
+        <menu>
+            <group
+                android:id="@+id/menu_top">
+                <item android:id="@+id/profile_item"
+                    android:icon="@drawable/ic_account_navdraw"
+                    android:title="@string/navdrawprofile"/>
+                <item android:id="@+id/favorites_item"
+                    android:icon="@drawable/ic_favorite_unclicked"
+                    android:title="@string/navdrawfavorites"/>
+            </group>
+        </menu>
+    </item>
+    <item>
+        <menu>
+            <group
+                android:id="@+id/menu_bottom">
+                <item android:id="@+id/logout_item"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Logout"/>
+            </group>
+        </menu>
+    </item>
+
+
+</menu>
