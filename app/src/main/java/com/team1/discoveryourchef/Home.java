@@ -24,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.android.volley.Response;
 import com.team1.discoveryourchef.Favorites.FavoritesPage;
@@ -219,7 +220,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 refreshView("Sweets","&dishType=Sweets");
                 break;
             case R.id.account_circle:
+                String fullName = getIntent().getExtras().getString("fullName");
+                String email = getIntent().getExtras().getString("email");
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                TextView txtProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_username);
+                TextView txtEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_email);
+                txtProfileName.setText(fullName);
+                txtEmail.setText(email);
                 drawer.openDrawer(Gravity.LEFT);
+                break;
         }
     }
 

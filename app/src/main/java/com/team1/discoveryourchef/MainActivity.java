@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     DocumentSnapshot document = task.getResult();
                     login.putExtra("fullName", document.getString("fullName"));
+                    login.putExtra("email", document.getString("email"));
                     startActivity(login);
                 }
             });
