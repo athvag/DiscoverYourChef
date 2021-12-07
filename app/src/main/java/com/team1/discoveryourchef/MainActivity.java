@@ -2,11 +2,13 @@ package com.team1.discoveryourchef;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     EditText loginEmail, loginPassword;
     Button loginButton;
     TextView gotoregister;
+    AlertDialog dialog;
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -67,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.progress_dialog, null));
+        dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
@@ -119,12 +129,14 @@ public class MainActivity extends AppCompatActivity {
             loginPassword.requestFocus();
             return;
         }
+        dialog.show();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()) {
+                    dialog.dismiss();
                     Intent login = new Intent(MainActivity.this,Home.class);
 
 
@@ -143,9 +155,66 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
-                else
-                {
-                    Toast.makeText(MainActivity.this, "Failed to login, check your credentials", Toast.LENGTH_SHORT).show();
+
+                   else {
+
+                    String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+
+                    switch (errorCode) {
+
+
+                        case "ERROR_INVALID_CREDENTIAL":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "The supplied auth credential is malformed or has expired.", Toast.LENGTH_LONG).show();
+                            break;
+
+                        case "ERROR_INVALID_EMAIL":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "The email address is badly formatted.", Toast.LENGTH_LONG).show();
+                            loginEmail.setError("The email address is badly formatted.");
+                            loginEmail.requestFocus();
+                            break;
+
+                        case "ERROR_WRONG_PASSWORD":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "The password is invalid or the user does not have a password.", Toast.LENGTH_LONG).show();
+                            loginPassword.setError("password is incorrect ");
+                            loginPassword.requestFocus();
+                            loginPassword.setText("");
+                            break;
+
+                        case "ERROR_USER_MISMATCH":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "The supplied credentials do not correspond to the previously signed in user.", Toast.LENGTH_LONG).show();
+                            break;
+
+                        case "ERROR_USER_DISABLED":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "The user account has been disabled by an administrator.", Toast.LENGTH_LONG).show();
+                            break;
+
+                        case "ERROR_USER_TOKEN_EXPIRED":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "The user\\'s credential is no longer valid. The user must sign in again.", Toast.LENGTH_LONG).show();
+                            break;
+
+                        case "ERROR_USER_NOT_FOUND":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "There is no user record corresponding to this identifier. The user may have been deleted.", Toast.LENGTH_LONG).show();
+                            break;
+
+                        case "ERROR_INVALID_USER_TOKEN":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "The user\\'s credential is no longer valid. The user must sign in again.", Toast.LENGTH_LONG).show();
+                            break;
+
+                        case "ERROR_OPERATION_NOT_ALLOWED":
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "This operation is not allowed. You must enable this service in the console.", Toast.LENGTH_LONG).show();
+                            break;
+
+
+                    }
                 }
             }
         });
