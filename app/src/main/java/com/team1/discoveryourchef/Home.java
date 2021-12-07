@@ -235,4 +235,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         startActivity(gotoRecipe);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(Home.this, "Use the \"Logout\" option from the user menu to logout", Toast.LENGTH_SHORT).show();
+    }
 }

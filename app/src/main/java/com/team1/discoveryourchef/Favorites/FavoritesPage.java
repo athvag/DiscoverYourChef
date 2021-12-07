@@ -3,6 +3,7 @@ package com.team1.discoveryourchef.Favorites;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import java.util.List;
 public class FavoritesPage extends AppCompatActivity implements FavoritesCallback {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     RecyclerView recyclerView;
+    ImageView back;
 
     private FavoritesAdapter favoritesSimpleAdapter;
 
@@ -61,6 +63,14 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
         links.clear();
         recipeID.clear();
         createRecyclerView();
+        back = findViewById(R.id.favorites_backButton);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 
@@ -151,7 +161,6 @@ public class FavoritesPage extends AppCompatActivity implements FavoritesCallbac
     //Decide what happens on each item of the recyclerview clicked
     @Override
     public void onItemClicked(View view, String name, Integer calories, String image, String ingredients,String links,Boolean isFavorite,String recipeID) {
-        Toast.makeText(this, "Clicked: "+ name + calories + image + ingredients, Toast.LENGTH_SHORT).show();
         Intent gotoRecipe = new Intent(FavoritesPage.this, RecipesPage.class);
         gotoRecipe.putExtra("recipeName",name);
         gotoRecipe.putExtra("recipeCalories",calories);
