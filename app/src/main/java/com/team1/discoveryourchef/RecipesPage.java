@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +30,7 @@ import java.util.UUID;
 
 public class RecipesPage extends AppCompatActivity implements View.OnClickListener, RecyclerCallback2 {
 
-    TextView recipeName, recipeCalories;
+    TextView recipeName, recipeCalories, fullrecipe;
     ImageView backButton, favourite, recipePhoto;
     private FirebaseAuth mAuth;
     RecyclerView recyclerView;
@@ -65,6 +67,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         recipeName = findViewById(R.id.recipeName);
         recipeCalories = findViewById(R.id.recipeCalories);
         recipePhoto = findViewById(R.id.recipePhoto);
+        fullrecipe = findViewById(R.id.full_recipe);
         recipeName.setText(recipe_name);
         recipeCalories.setText("Calories: " + recipe_calories);
         Picasso.get().load(recipe_image).placeholder(R.drawable.defaultfood).fit().into(recipePhoto);
@@ -96,6 +99,15 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
                     removeFromFirebase();
                 }
 
+            }
+        });
+
+        fullrecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(recipe_link));
+                startActivity(i);
             }
         });
 

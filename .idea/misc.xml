@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/activity_home.xml" value="0.276268115942029" />
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/activity_main.xml" value="0.276268115942029" />
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/activity_recipes_page.xml" value="0.276268115942029" />
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/holden_food_item.xml" value="0.276268115942029" />
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/holder_favorites_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/holder_recipe_item.xml" value="0.276268115942029" />
         <entry key="..\:/Users/bagel/Desktop/DiscoverYourChef/app/src/main/res/drawable-v24/ic_baseline_account_circle_24.xml" value="0.274609375" />
         <entry key="..\:/Users/bagel/Desktop/DiscoverYourChef/app/src/main/res/drawable-v24/ic_baseline_arrow_forward_24.xml" value="0.274609375" />
         <entry key="..\:/Users/bagel/Desktop/DiscoverYourChef/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.359375" />
