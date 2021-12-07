@@ -47,23 +47,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent login = new Intent(MainActivity.this, Home.class);
-            DocumentReference user = db.collection("Users").document(currentUser.getUid());
-            user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    DocumentSnapshot document = task.getResult();
-                    login.putExtra("fullName", document.getString("fullName"));
-                    startActivity(login);
-                }
-            });
-        }
-        else{
-
-        }
     }
 
 
@@ -77,6 +60,27 @@ public class MainActivity extends AppCompatActivity {
         builder.setView(inflater.inflate(R.layout.progress_dialog, null));
         dialog = builder.create();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            dialog.show();
+            Intent login = new Intent(MainActivity.this, Home.class);
+            DocumentReference user = db.collection("Users").document(currentUser.getUid());
+            user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    dialog.dismiss();
+                    DocumentSnapshot document = task.getResult();
+                    login.putExtra("fullName", document.getString("fullName"));
+                    startActivity(login);
+                }
+            });
+        }
+        else{
+
+        }
+
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
