@@ -14,6 +14,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -78,6 +79,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         recyclerView = findViewById(R.id.recycler_menu);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         //Initiate the clicks on the categories//
         clickItem1 = findViewById(R.id.cat_menu_1);
         clickItem2 = findViewById(R.id.cat_menu_2);
@@ -88,6 +91,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         clickItem7 = findViewById(R.id.cat_menu_7);
         clickItem8 = findViewById(R.id.cat_menu_8);
         drawer = findViewById(R.id.drawer_layout);
+        //Disable left to right swipe to open navigation drawer
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         clickItem1.setOnClickListener(this);
         clickItem2.setOnClickListener(this);
         clickItem3.setOnClickListener(this);
@@ -98,6 +103,28 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         clickItem8.setOnClickListener(this);
         profile.setOnClickListener(this);
         //Finish initiating the clicks//
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.profile_item:
+                        //Do some thing here
+                        // add navigation drawer item onclick method here
+                        break;
+                    case R.id.favorites_item:
+                        Intent i = new Intent(Home.this, FavoritesPage.class);
+                        startActivity(i);
+                        break;
+                    case R.id.logout_item:
+                        //Do some thing here
+                        // add navigation drawer item onclick method here
+                        break;
+                }
+                return false;
+            }
+        });
 
         //Load random pizza recipies//
         loadRecipies("&q=pizza");
