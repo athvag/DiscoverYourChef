@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="For ful recipe click here!"
+        android:text="For full recipe click here!"
         android:gravity="center"
         android:textSize="14dp"
         android:maxLines = "1"
