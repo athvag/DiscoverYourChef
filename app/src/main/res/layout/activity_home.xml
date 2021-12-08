@@ -111,7 +111,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/starter"></ImageView>
 
                     <TextView
 
@@ -152,7 +152,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/bread"></ImageView>
 
                     <TextView
 
@@ -193,7 +193,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/cereal"></ImageView>
 
                     <TextView
 
@@ -235,7 +235,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/side"></ImageView>
 
                     <TextView
 
@@ -281,7 +281,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/soup"></ImageView>
 
                     <TextView
 
@@ -322,7 +322,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/main_course"></ImageView>
 
                     <TextView
 
@@ -363,7 +363,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/pancakes_transparent"></ImageView>
 
                     <TextView
 
@@ -405,7 +405,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_food"></ImageView>
+                        android:src="@drawable/sweets"></ImageView>
 
                     <TextView
 
