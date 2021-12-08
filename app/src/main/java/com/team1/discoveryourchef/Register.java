@@ -131,8 +131,6 @@ public class Register extends AppCompatActivity {
                                     startActivity(new Intent(Register.this,MainActivity.class));
                                 }
                             });
-
-
                     }
                         else {
 

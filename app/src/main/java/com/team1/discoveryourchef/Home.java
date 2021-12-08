@@ -5,13 +5,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +25,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.android.volley.Response;
 import com.team1.discoveryourchef.Favorites.FavoritesPage;
@@ -34,6 +39,7 @@ import java.util.List;
 
 public class Home extends AppCompatActivity implements View.OnClickListener, RecyclerCallback {
 
+    private DrawerLayout drawer;
     TextView welcome;
     List<String> names = new ArrayList<>();
     List<Integer> calories = new ArrayList<>();
@@ -58,6 +64,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         super.onPostCreate(savedInstanceState);
 
         String fullName = getIntent().getExtras().getString("fullName");
+        String email = getIntent().getExtras().getString("email");
         welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome " + fullName);
         profile = findViewById(R.id.account_circle);
@@ -74,6 +81,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         recyclerView = findViewById(R.id.recycler_menu);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         //Initiate the clicks on the categories//
         clickItem1 = findViewById(R.id.cat_menu_1);
         clickItem2 = findViewById(R.id.cat_menu_2);
@@ -83,6 +92,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         clickItem6 = findViewById(R.id.cat_menu_6);
         clickItem7 = findViewById(R.id.cat_menu_7);
         clickItem8 = findViewById(R.id.cat_menu_8);
+        drawer = findViewById(R.id.drawer_layout);
+        //Disable left to right swipe to open navigation drawer
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         clickItem1.setOnClickListener(this);
         clickItem2.setOnClickListener(this);
         clickItem3.setOnClickListener(this);
@@ -91,11 +103,36 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         clickItem6.setOnClickListener(this);
         clickItem7.setOnClickListener(this);
         clickItem8.setOnClickListener(this);
+        profile.setOnClickListener(this);
         //Finish initiating the clicks//
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.profile_item:
+                        //Do some thing here
+                        // add navigation drawer item onclick method here
+                        break;
+                    case R.id.favorites_item:
+                        Intent i = new Intent(Home.this, FavoritesPage.class);
+                        startActivity(i);
+                        break;
+                    case R.id.logout_item:
+                        FirebaseAuth.getInstance().signOut();
+                        finish();
+                        startActivity(new Intent(Home.this, MainActivity.class ));
+                        break;
+                }
+                return false;
+            }
+        });
 
         //Load random pizza recipies//
         loadRecipies("&q=pizza");
 
+        /*
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +140,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 startActivity(intent);
             }
         });
+         */
     }
 
     private void clearLast() {
@@ -210,6 +248,19 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 break;
             case R.id.cat_menu_8:
                 refreshView("Sweets","&dishType=Sweets");
+                break;
+            case R.id.account_circle:
+                /*
+                String fullName = getIntent().getExtras().getString("fullName");
+                String email = getIntent().getExtras().getString("email");
+                 */
+                String [] mainActExtra = getIntent().getStringArrayExtra("fnem");
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                TextView txtProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_username);
+                TextView txtEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_email);
+                txtProfileName.setText(mainActExtra[0]);
+                txtEmail.setText(mainActExtra[1]);
+                drawer.openDrawer(Gravity.LEFT);
                 break;
         }
     }
