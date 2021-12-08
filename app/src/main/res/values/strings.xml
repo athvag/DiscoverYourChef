@@ -19,6 +19,43 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+
+    <string-array name="spinnerdiet">
+        <item></item>
+        <item>balanced</item>
+        <item>high-fiber</item>
+        <item>high-protein</item>
+        <item>low-carb</item>
+        <item>low-fat</item>
+        <item>low-sodium</item>
+    </string-array>
+
+    <string-array name="spinnermeal">
+        <item></item>
+        <item>Breakfast</item>
+        <item>Dinner</item>
+        <item>Lunch</item>
+        <item>Snack</item>
+        <item>Teatime</item>
+    </string-array>
+
+    <string-array name="spinnerdish">
+        <item></item>
+        <item>Biscuit and cookies</item>
+        <item>Bread</item>
+        <item>Cereals</item>
+        <item>Condiments and sauces</item>
+        <item>Desserts</item>
+        <item>Drinks</item>
+        <item>Main Course</item>
+        <item>Pancakes</item>
+        <item>Salad</item>
+        <item>Soup</item>
+        <item>Starter</item>
+        <item>Sweets</item>
+
+    </string-array>
     <string name="navdrawprofile">Profile</string>
     <string name="navdrawfavorites">Favorites</string>
 </resources>

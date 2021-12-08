@@ -5,16 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.android.volley.Response;
 import com.team1.discoveryourchef.Favorites.FavoritesPage;
@@ -53,7 +51,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     TextView foodLabel;
     AlertDialog dialog;
     GridLayoutManager gridLayoutManager;
-    ImageView profile;
+    ImageView profile,search;
+
+    BottomSheetDialog bottomSheetDialog;
+    Button start_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         //End of loading window//
 
-
+        search = findViewById(R.id.search_icon);
         foodLabel = findViewById(R.id.food_header);
 
         recyclerView = findViewById(R.id.recycler_menu);
@@ -105,6 +106,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         clickItem6.setOnClickListener(this);
         clickItem7.setOnClickListener(this);
         clickItem8.setOnClickListener(this);
+        search.setOnClickListener(this);
         profile.setOnClickListener(this);
         //Finish initiating the clicks//
 
@@ -132,9 +134,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         });
 
         //Load random pizza recipies//
-        loadRecipies("&q=pizza");
+        loadRecipies("&q=pizza","");
 
-        /*
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +143,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 startActivity(intent);
             }
         });
-         */
     }
 
     private void clearLast() {
@@ -168,12 +168,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
     //Basic function to handle the recipe load
 
-    private void loadRecipies(String queue) {
+    private void loadRecipies(String queue, String queue2) {
 
         String tempUrl = "";
         dialog.show(); //Show the loading animation
 
-        tempUrl = "https://api.edamam.com/api/recipes/v2?type=public" + queue + "&app_id=04d3b2e6&app_key=e6bcb688109bd063ca951d0f9f1834ad&random=true";//The API call link
+        tempUrl = "https://api.edamam.com/api/recipes/v2?type=public" + queue + "&app_id=04d3b2e6&app_key=e6bcb688109bd063ca951d0f9f1834ad" +queue2 + "&random=true";//The API call link
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, tempUrl, new Response.Listener<String>() {
             @Override
@@ -213,7 +213,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) { //This handles any errors sent from the API call
-                Toast.makeText(getApplicationContext(), "Slow down, our cooks are tired", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Slow down, our cooks are tired" + error.getMessage(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -251,6 +251,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
             case R.id.cat_menu_8:
                 refreshView("Sweets","&dishType=Sweets");
                 break;
+            case R.id.search_icon:
+                start_food_search();
+                break;
             case R.id.account_circle:
                 //String [] mainActExtra = getIntent().getStringArrayExtra("fnem");
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -263,10 +266,118 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         }
     }
 
+    private void start_food_search() {
+        bottomSheetDialog = new BottomSheetDialog(Home.this);
+        View view = getLayoutInflater().inflate(R.layout.search_menu,null,false);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
+
+        AppCompatSpinner spinner = bottomSheetDialog.findViewById(R.id.content_spinner_diet);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinnerdiet, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        AppCompatSpinner spinner2 = bottomSheetDialog.findViewById(R.id.content_spinner_meal);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.spinnermeal, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(adapter2);
+
+        AppCompatSpinner spinner3 = bottomSheetDialog.findViewById(R.id.content_spinner_dish);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
+                R.array.spinnerdish, android.R.layout.simple_spinner_item);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner3.setAdapter(adapter3);
+
+        EditText ingredientName = bottomSheetDialog.findViewById(R.id.search_by_ingredient_edittext);
+        EditText ingredientNumber = bottomSheetDialog.findViewById(R.id.search_by_ingredient_num_edittext);
+        EditText ingredientMinCalories = bottomSheetDialog.findViewById(R.id.seach_by_calories_range_min);
+        EditText ingredientMaxCalories = bottomSheetDialog.findViewById(R.id.seach_by_calories_range_max);
+        EditText ingredientMinTime = bottomSheetDialog.findViewById(R.id.seach_by_time_range_min);
+        EditText ingredientMaxTime = bottomSheetDialog.findViewById(R.id.seach_by_time_range_max);
+
+
+        start_search = bottomSheetDialog.findViewById(R.id.start_search_button);
+
+        start_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchString1 = "";
+                String searchString2 = "";
+                String searchCalories ="";
+                String searchTime ="";
+                if(!ingredientName.getText().toString().matches("")){
+                    searchString1 = searchString1 + "&q="+ingredientName.getText().toString();
+                }
+
+                if(!ingredientNumber.getText().toString().matches("")){
+                    searchString2 = searchString2 + "&ingr="+ingredientNumber.getText().toString();
+                }
+
+                if(spinner != null && spinner.getSelectedItem() != null && !spinner.getSelectedItem().toString().isEmpty()) {
+                    searchString2 = searchString2  + "&diet="+ spinner.getSelectedItem().toString();
+                }
+
+                if(spinner2 != null && spinner2.getSelectedItem() != null && !spinner2.getSelectedItem().toString().isEmpty()) {
+                    searchString2 = searchString2  + "&mealType="+ spinner2.getSelectedItem().toString();
+                }
+
+                if(spinner3 != null && spinner3.getSelectedItem() != null && !spinner3.getSelectedItem().toString().isEmpty()) {
+                    if(spinner3.getSelectedItem().toString().equals("Biscuit and cookies") || spinner3.getSelectedItem().toString().equals("Condiments and sauces") || spinner3.getSelectedItem().toString().equals("Main Course"))
+                    {
+                        String selecteddish = spinner3.getSelectedItem().toString().replace(" ","%20");
+                        searchString2 = searchString2  + "&dishType="+ selecteddish;
+                    }
+                    else{
+                        searchString2 = searchString2  + "&dishType="+ spinner3.getSelectedItem().toString();
+                    }
+
+                }
+
+                if(!ingredientMinCalories.getText().toString().matches("") && !ingredientMaxCalories.getText().toString().matches("")){
+                    searchCalories = "&calories=" +ingredientMinCalories.getText().toString() +"-" +ingredientMaxCalories.getText().toString();
+                    searchString2 = searchString2 + searchCalories;
+                }
+                if(!ingredientMinCalories.getText().toString().matches("") && ingredientMaxCalories.getText().toString().matches(""))
+                {
+                    searchCalories = "&calories=" + ingredientMinCalories.getText().toString();
+                    searchString2 = searchString2 + searchCalories;
+                }
+
+                if(ingredientMinCalories.getText().toString().matches("") && !ingredientMaxCalories.getText().toString().matches(""))
+                {
+                    searchCalories = "&calories=" + ingredientMaxCalories.getText().toString();
+                    searchString2 = searchString2 + searchCalories;
+                }
+
+                if(!ingredientMinTime.getText().toString().matches("") && !ingredientMaxTime.getText().toString().matches("")){
+                    searchTime = "&time=" +ingredientMinTime.getText().toString() +"-" +ingredientMaxTime.getText().toString();
+                    searchString2 = searchString2 + searchTime;
+                }
+                if(!ingredientMinTime.getText().toString().matches("") && ingredientMaxTime.getText().toString().matches(""))
+                {
+                    searchTime = "&time=" + ingredientMinTime.getText().toString();
+                    searchString2 = searchString2 + searchTime;
+                }
+
+                if(ingredientMinTime.getText().toString().matches("") && !ingredientMaxTime.getText().toString().matches(""))
+                {
+                    searchTime = "&time=" + ingredientMaxTime.getText().toString();
+                    searchString2 = searchString2 + searchTime;
+                }
+                bottomSheetDialog.dismiss();
+                clearLast();
+                loadRecipies(searchString1,searchString2);
+            }
+        });
+
+    }
+
     private void refreshView(String food_type, String s) {
         clearLast();
         foodLabel.setText(food_type);
-        loadRecipies(s);
+        loadRecipies(s,"");
     }
 
 
