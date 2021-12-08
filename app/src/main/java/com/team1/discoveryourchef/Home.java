@@ -143,13 +143,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         //Load random pizza recipies//
         loadRecipies("&q=pizza","");
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, FavoritesPage.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void clearLast() {
@@ -158,6 +151,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         calories.clear();
         ingredients.clear();
         images.clear();
+        links.clear();
     }
 
     //Handle the orientation changes//
