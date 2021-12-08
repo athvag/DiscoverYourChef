@@ -164,7 +164,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onItemClicked(View view, String ingredients) {
-        Toast.makeText(this, "Clicked: "+ ingredients, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Clicked: "+ ingredients, Toast.LENGTH_SHORT).show();
 
     }
 

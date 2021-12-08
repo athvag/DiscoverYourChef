@@ -58,7 +58,8 @@
             <TextView
                 android:id="@+id/fav_name_header"
                 app:layout_constraintBottom_toTopOf="@+id/fav_desc"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
+                android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="Pizza"
@@ -68,7 +69,7 @@
 
             <TextView
                 android:id="@+id/fav_desc"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:singleLine="true"
