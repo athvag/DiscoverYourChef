@@ -327,6 +327,8 @@
                         android:src="@drawable/main_course"></ImageView>
 
                     <TextView
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
                         android:textColor="@color/textcolorblack"
                         android:id="@+id/cat6_text"
                         android:layout_width="wrap_content"
