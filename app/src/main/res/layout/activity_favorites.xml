@@ -8,6 +8,7 @@
     android:background="@drawable/background">
 
     <TextView
+        android:textColor="@color/textcolorblack"
         android:id="@+id/favorites_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

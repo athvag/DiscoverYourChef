@@ -379,9 +379,17 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                     searchTime = "&time=" + ingredientMaxTime.getText().toString();
                     searchString2 = searchString2 + searchTime;
                 }
-                bottomSheetDialog.dismiss();
-                clearLast();
-                loadRecipies(searchString1, searchString2);
+                if (ingredientName.getText().toString().matches("")) {
+                    ingredientName.setError("Ingredient name is required");
+                    ingredientName.requestFocus();
+                }
+                else{
+                    bottomSheetDialog.dismiss();
+                    clearLast();
+                    loadRecipies(searchString1, searchString2);
+                    foodLabel.setText("Food based on your search");
+                }
+
             }
         });
 

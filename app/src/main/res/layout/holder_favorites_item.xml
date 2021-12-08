@@ -24,7 +24,7 @@
 
                 android:id="@+id/fav_cal"
 
-                android:layout_marginLeft="23dp"
+                android:layout_marginLeft="13dp"
                 app:layout_constraintLeft_toRightOf="@id/fav_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/fav_cal_header"
@@ -32,7 +32,7 @@
                 app:layout_constraintVertical_chainStyle="spread"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/calories"/>
+                android:src="@drawable/floga"/>
 
             <TextView
                 android:id="@+id/fav_cal_header"
@@ -42,12 +42,13 @@
                 android:layout_marginTop="4dp"
                 android:text="670 Calories"
                 android:textSize="12sp"
-
+                android:textColor="@color/textcolorblack"
                 app:layout_constraintLeft_toRightOf="@id/fav_cal"
                 app:layout_constraintTop_toTopOf="@id/fav_cal" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 app:shapeAppearanceOverlay="@style/Circular"
+                android:padding="8dp"
                 android:id="@+id/fav_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -61,9 +62,10 @@
                 android:layout_width="200dp"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:text="Pizza"
                 android:textSize="15sp"
+                android:textColor="@color/textcolorblack"
                 app:layout_constraintLeft_toRightOf="@id/fav_image"
                 app:layout_constraintTop_toBottomOf="@id/fav_cal" />
 
@@ -74,13 +76,14 @@
                 android:layout_marginRight="10dp"
                 android:singleLine="true"
                 android:text="With Ham, Cheese, Peperoni"
+                android:textColor="@color/textcolorblack"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/fav_name_header"
                 app:layout_constraintTop_toBottomOf="@id/fav_name_header" />
 
             <ImageView
-
+                app:tint="@color/textcolorblack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_arrow_forward_24"

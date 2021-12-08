@@ -14,6 +14,8 @@
         >
 
         <TextView
+
+            android:textColor="@color/textcolorblack"
             android:id="@+id/search_fragment_title"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -28,6 +30,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:textColor="@color/textcolorblack"
             android:id="@+id/seach_by_ingredient"
             app:layout_constraintBottom_toTopOf="@id/search_by_ingredient_edittext"
             app:layout_constraintTop_toBottomOf="@id/search_fragment_title"
@@ -41,6 +44,8 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
             android:id="@+id/search_by_ingredient_edittext"
             android:inputType="textPersonName"
             android:layout_width="match_parent"
@@ -59,6 +64,7 @@
 
 
         <TextView
+            android:textColor="@color/textcolorblack"
             android:id="@+id/seach_by_ingredient_num"
             app:layout_constraintBottom_toTopOf="@id/search_by_ingredient_num_edittext"
             app:layout_constraintTop_toBottomOf="@id/search_by_ingredient_edittext"
@@ -72,6 +78,8 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
             android:inputType="number"
             android:id="@+id/search_by_ingredient_num_edittext"
             android:layout_width="match_parent"
@@ -89,6 +97,7 @@
             android:gravity="center"/>
 
         <TextView
+            android:textColor="@color/textcolorblack"
             android:id="@+id/search_by_diet_type"
             app:layout_constraintTop_toBottomOf="@id/search_by_ingredient_num_edittext"
             android:layout_marginLeft="16dp"
@@ -119,6 +128,7 @@
 
 
         <TextView
+            android:textColor="@color/textcolorblack"
             android:id="@+id/seach_by_meal_type"
             app:layout_constraintTop_toBottomOf="@id/content_spinner_diet"
             android:layout_marginLeft="16dp"
@@ -146,6 +156,7 @@
             />
 
         <TextView
+            android:textColor="@color/textcolorblack"
             android:id="@+id/seach_by_dish_type"
             app:layout_constraintTop_toBottomOf="@id/content_spinner_meal"
             android:layout_marginLeft="16dp"
@@ -173,6 +184,7 @@
             />
 
         <TextView
+            android:textColor="@color/textcolorblack"
             android:id="@+id/seach_by_calories_range"
             app:layout_constraintTop_toBottomOf="@id/content_spinner_dish"
             android:layout_marginLeft="16dp"
@@ -186,6 +198,8 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
             android:inputType="number"
             android:id="@+id/seach_by_calories_range_min"
             android:layout_width="match_parent"
@@ -203,6 +217,8 @@
             android:gravity="center"/>
 
         <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
             android:inputType="number"
             android:id="@+id/seach_by_calories_range_max"
             android:layout_width="match_parent"
@@ -221,6 +237,7 @@
 
 
         <TextView
+            android:textColor="@color/textcolorblack"
             android:id="@+id/seach_by_time_range"
             app:layout_constraintTop_toBottomOf="@id/seach_by_calories_range_max"
             app:layout_constraintBottom_toTopOf="@id/seach_by_time_range_min"
@@ -234,6 +251,8 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
             android:inputType="number"
             android:id="@+id/seach_by_time_range_min"
             app:layout_constraintBottom_toTopOf="@id/seach_by_time_range_max"
@@ -251,6 +270,8 @@
             android:gravity="center"/>
 
         <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
             android:inputType="number"
             android:id="@+id/seach_by_time_range_max"
             android:layout_width="match_parent"
@@ -268,6 +289,7 @@
             android:gravity="center"/>
 
         <Button
+            android:textColor="@color/textcolorblack"
             android:id="@+id/start_search_button"
             android:backgroundTint="#dbcdb5"
             android:elevation="0dp"
