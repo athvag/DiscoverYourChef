@@ -14,6 +14,7 @@
         android:layout_marginTop="4dp"
         android:text="670 Calories"
         android:textSize="16dp"
+        android:textColor="#222222"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
