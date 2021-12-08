@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/test"
+        >
+
+        <TextView
+
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/search_fragment_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:textSize="30sp"
+            android:text="Search"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/seach_by_ingredient"
+            app:layout_constraintBottom_toTopOf="@id/search_by_ingredient_edittext"
+            app:layout_constraintTop_toBottomOf="@id/search_fragment_title"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Ingredient Name"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
+            android:id="@+id/search_by_ingredient_edittext"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_ingredient_num"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/login_bg"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_ingredient"
+            android:hint="Seach by Ingredient Name"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+
+        <TextView
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/seach_by_ingredient_num"
+            app:layout_constraintBottom_toTopOf="@id/search_by_ingredient_num_edittext"
+            app:layout_constraintTop_toBottomOf="@id/search_by_ingredient_edittext"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Number of Ingredients"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
+            android:inputType="number"
+            android:id="@+id/search_by_ingredient_num_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/login_bg"
+            app:layout_constraintBottom_toTopOf="@id/search_by_diet_type"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_ingredient_num"
+            android:hint="Seach by Ingredient Number"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <TextView
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/search_by_diet_type"
+            app:layout_constraintTop_toBottomOf="@id/search_by_ingredient_num_edittext"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/content_spinner_diet"
+            android:textSize="20sp"
+            android:text="Diet Type"
+            android:textStyle="bold"/>
+
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            app:layout_constraintTop_toBottomOf="@id/search_by_diet_type"
+            android:backgroundTint="@color/secondary"
+            android:id="@+id/content_spinner_diet"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/spinnerdiet"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_meal_type"
+            />
+
+
+
+        <TextView
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/seach_by_meal_type"
+            app:layout_constraintTop_toBottomOf="@id/content_spinner_diet"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/content_spinner_meal"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Meal Type"
+            android:textStyle="bold"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            app:layout_constraintTop_toBottomOf="@id/seach_by_meal_type"
+            android:backgroundTint="@color/secondary"
+            android:id="@+id/content_spinner_meal"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/spinnermeal"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_dish_type"
+            />
+
+        <TextView
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/seach_by_dish_type"
+            app:layout_constraintTop_toBottomOf="@id/content_spinner_meal"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/content_spinner_dish"
+            android:textSize="20sp"
+            android:text="Dish Type"
+            android:textStyle="bold"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            app:layout_constraintTop_toBottomOf="@id/seach_by_dish_type"
+            android:backgroundTint="@color/secondary"
+            android:id="@+id/content_spinner_dish"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/spinnerdish"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_calories_range"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            />
+
+        <TextView
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/seach_by_calories_range"
+            app:layout_constraintTop_toBottomOf="@id/content_spinner_dish"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_calories_range_min"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Calories Range"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
+            android:inputType="number"
+            android:id="@+id/seach_by_calories_range_min"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_calories_range_max"
+            android:background="@drawable/login_bg"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_calories_range"
+            android:hint="Minimum Calories"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
+            android:inputType="number"
+            android:id="@+id/seach_by_calories_range_max"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/login_bg"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_calories_range_min"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_time_range"
+            android:hint="Maximum Calories"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+
+        <TextView
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/seach_by_time_range"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_calories_range_max"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_time_range_min"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Time Range"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
+            android:inputType="number"
+            android:id="@+id/seach_by_time_range_min"
+            app:layout_constraintBottom_toTopOf="@id/seach_by_time_range_max"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/login_bg"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_time_range"
+            android:hint="Minimum Time"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <EditText
+            android:textColor="@color/textcolorblack"
+            android:textColorHint="@color/textcolorblack"
+            android:inputType="number"
+            android:id="@+id/seach_by_time_range_max"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/login_bg"
+            app:layout_constraintBottom_toTopOf="@id/start_search_button"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_time_range_min"
+            android:hint="Maximum Time"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <Button
+            android:textColor="@color/textcolorblack"
+            android:id="@+id/start_search_button"
+            android:backgroundTint="#dbcdb5"
+            android:elevation="0dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:text="Search"
+            app:layout_constraintTop_toBottomOf="@id/seach_by_time_range_max"></Button>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

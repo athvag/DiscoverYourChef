@@ -30,9 +30,10 @@
                 app:layout_constraintBottom_toBottomOf="@id/food1_cal_header"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/calories"/>
+                android:src="@drawable/floga"/>
 
             <TextView
+                android:textColor="@color/textcolorblack"
                 android:id="@+id/food1_cal_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,13 +58,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-
+                android:textColor="@color/textcolorblack"
                 android:text="Pizza"
                 android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/food1_image" />
 
             <TextView
+                android:textColor="@color/textcolorblack"
                 android:id="@+id/food1_desc"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -76,7 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@id/food1_name_header" />
 
             <ImageView
-
+                app:tint="@color/textcolorblack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_arrow_forward_24"

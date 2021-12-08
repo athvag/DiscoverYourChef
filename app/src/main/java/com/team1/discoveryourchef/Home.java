@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.android.volley.Response;
 import com.team1.discoveryourchef.Favorites.FavoritesPage;
@@ -38,10 +44,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends AppCompatActivity implements View.OnClickListener, RecyclerCallback {
-
     String fullName;
     String email;
-    private DrawerLayout drawer;
+    String lastqueue1, lastqueue2;
+    DrawerLayout drawer;
     TextView welcome;
     List<String> names = new ArrayList<>();
     List<Integer> calories = new ArrayList<>();
@@ -53,7 +59,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     TextView foodLabel;
     AlertDialog dialog;
     GridLayoutManager gridLayoutManager;
-    ImageView profile;
+    ImageView profile, search;
+    BottomSheetDialog bottomSheetDialog;
+    Button start_search;
+    private NestedScrollView nestedSV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +79,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome " + fullName);
         profile = findViewById(R.id.account_circle);
+        nestedSV = findViewById(R.id.idNestedSV);
+
+
         //Create the loading window//
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -78,12 +90,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         //End of loading window//
 
-
+        search = findViewById(R.id.search_icon);
         foodLabel = findViewById(R.id.food_header);
 
         recyclerView = findViewById(R.id.recycler_menu);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
         //Initiate the clicks on the categories//
         clickItem1 = findViewById(R.id.cat_menu_1);
@@ -105,6 +117,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         clickItem6.setOnClickListener(this);
         clickItem7.setOnClickListener(this);
         clickItem8.setOnClickListener(this);
+        search.setOnClickListener(this);
         profile.setOnClickListener(this);
         //Finish initiating the clicks//
 
@@ -124,7 +137,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                     case R.id.logout_item:
                         FirebaseAuth.getInstance().signOut();
                         finish();
-                        startActivity(new Intent(Home.this, MainActivity.class ));
+                        startActivity(new Intent(Home.this, MainActivity.class));
                         break;
                 }
                 return false;
@@ -132,17 +145,20 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         });
 
         //Load random pizza recipies//
-        loadRecipies("&q=pizza");
+        loadRecipies("&q=pizza", "");
 
-        /*
-        profile.setOnClickListener(new View.OnClickListener() {
+        nestedSV.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, FavoritesPage.class);
-                startActivity(intent);
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // on scroll change we are checking when users scroll as bottom.
+                if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    loadRecipies(lastqueue1, lastqueue2);
+                }
             }
         });
-         */
+
     }
 
     private void clearLast() {
@@ -151,6 +167,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         calories.clear();
         ingredients.clear();
         images.clear();
+        links.clear();
     }
 
     //Handle the orientation changes//
@@ -168,12 +185,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
     //Basic function to handle the recipe load
 
-    private void loadRecipies(String queue) {
-
+    private void loadRecipies(String queue, String queue2) {
+        lastqueue1 = queue;
+        lastqueue2 = queue2;
         String tempUrl = "";
         dialog.show(); //Show the loading animation
 
-        tempUrl = "https://api.edamam.com/api/recipes/v2?type=public" + queue + "&app_id=04d3b2e6&app_key=e6bcb688109bd063ca951d0f9f1834ad&random=true";//The API call link
+
+        tempUrl = "https://api.edamam.com/api/recipes/v2?type=public" + queue + "&app_id=04d3b2e6&app_key=e6bcb688109bd063ca951d0f9f1834ad" + queue2 + "&random=true";//The API call link
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, tempUrl, new Response.Listener<String>() {
             @Override
@@ -195,7 +214,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 //If there are JSON objects in the query//
                 if (!names.isEmpty()) {
 
-                    RecyclerAdapter adapter = new RecyclerAdapter(names, calories, ingredients, images, links,Home.this);  //Create a new adapter with the items added above//
+                    RecyclerAdapter adapter = new RecyclerAdapter(names, calories, ingredients, images, links, Home.this);  //Create a new adapter with the items added above//
                     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { //Handle the orientation changes//
                         gridLayoutManager = new GridLayoutManager(Home.this, 2, GridLayoutManager.VERTICAL, false); //This is used to create 2 collumns to the recyclerview//
 
@@ -213,7 +232,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) { //This handles any errors sent from the API call
-                Toast.makeText(getApplicationContext(), "Slow down, our cooks are tired", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Slow down, our cooks are tired" + error.getMessage(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -228,34 +247,37 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     public void onClick(View v) { //Handle the clicks of the Category items//
         switch (v.getId()) {
             case R.id.cat_menu_1:
-                refreshView("Starter Food","&dishType=Starter");
+                refreshView("Starter Food", "&dishType=Starter");
                 break;
             case R.id.cat_menu_2:
-                refreshView("Breads","&dishType=Bread");
+                refreshView("Breads", "&dishType=Bread");
                 break;
             case R.id.cat_menu_3:
-                refreshView("Cereals","&dishType=Cereals");
+                refreshView("Cereals", "&dishType=Cereals");
                 break;
             case R.id.cat_menu_4:
-                refreshView("Side Dishes","&dishType=Side Disk");
+                refreshView("Side Dishes", "&dishType=Side%20dish");
                 break;
             case R.id.cat_menu_5:
-                refreshView("Soups","&dishType=Soup");
+                refreshView("Soups", "&dishType=Soup");
                 break;
             case R.id.cat_menu_6:
-                refreshView("Main Course","&dishType=Main Course");
+                refreshView("Main Course", "&dishType=Main%20course");
                 break;
             case R.id.cat_menu_7:
-                refreshView("Pancakes","&dishType=Pancakes");
+                refreshView("Pancakes", "&dishType=Pancakes");
                 break;
             case R.id.cat_menu_8:
-                refreshView("Sweets","&dishType=Sweets");
+                refreshView("Sweets", "&dishType=Sweets");
+                break;
+            case R.id.search_icon:
+                start_food_search();
                 break;
             case R.id.account_circle:
                 //String [] mainActExtra = getIntent().getStringArrayExtra("fnem");
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                TextView txtProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_username);
-                TextView txtEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_email);
+                NavigationView navigationView = findViewById(R.id.nav_view);
+                TextView txtProfileName = navigationView.getHeaderView(0).findViewById(R.id.nav_username);
+                TextView txtEmail = navigationView.getHeaderView(0).findViewById(R.id.nav_email);
                 txtProfileName.setText(fullName);
                 txtEmail.setText(email);
                 drawer.openDrawer(Gravity.LEFT);
@@ -263,10 +285,120 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         }
     }
 
+    private void start_food_search() {
+        bottomSheetDialog = new BottomSheetDialog(Home.this);
+        View view = getLayoutInflater().inflate(R.layout.search_menu, null, false);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
+
+        AppCompatSpinner spinner = bottomSheetDialog.findViewById(R.id.content_spinner_diet);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinnerdiet, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        AppCompatSpinner spinner2 = bottomSheetDialog.findViewById(R.id.content_spinner_meal);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.spinnermeal, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(adapter2);
+
+        AppCompatSpinner spinner3 = bottomSheetDialog.findViewById(R.id.content_spinner_dish);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
+                R.array.spinnerdish, android.R.layout.simple_spinner_item);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner3.setAdapter(adapter3);
+
+        EditText ingredientName = bottomSheetDialog.findViewById(R.id.search_by_ingredient_edittext);
+        EditText ingredientNumber = bottomSheetDialog.findViewById(R.id.search_by_ingredient_num_edittext);
+        EditText ingredientMinCalories = bottomSheetDialog.findViewById(R.id.seach_by_calories_range_min);
+        EditText ingredientMaxCalories = bottomSheetDialog.findViewById(R.id.seach_by_calories_range_max);
+        EditText ingredientMinTime = bottomSheetDialog.findViewById(R.id.seach_by_time_range_min);
+        EditText ingredientMaxTime = bottomSheetDialog.findViewById(R.id.seach_by_time_range_max);
+
+
+        start_search = bottomSheetDialog.findViewById(R.id.start_search_button);
+
+        start_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchString1 = "";
+                String searchString2 = "";
+                String searchCalories = "";
+                String searchTime = "";
+                if (!ingredientName.getText().toString().matches("")) {
+                    searchString1 = searchString1 + "&q=" + ingredientName.getText().toString();
+                }
+
+                if (!ingredientNumber.getText().toString().matches("")) {
+                    searchString2 = searchString2 + "&ingr=" + ingredientNumber.getText().toString();
+                }
+
+                if (spinner != null && spinner.getSelectedItem() != null && !spinner.getSelectedItem().toString().isEmpty()) {
+                    searchString2 = searchString2 + "&diet=" + spinner.getSelectedItem().toString();
+                }
+
+                if (spinner2 != null && spinner2.getSelectedItem() != null && !spinner2.getSelectedItem().toString().isEmpty()) {
+                    searchString2 = searchString2 + "&mealType=" + spinner2.getSelectedItem().toString();
+                }
+
+                if (spinner3 != null && spinner3.getSelectedItem() != null && !spinner3.getSelectedItem().toString().isEmpty()) {
+                    if (spinner3.getSelectedItem().toString().equals("Biscuit and cookies") || spinner3.getSelectedItem().toString().equals("Condiments and sauces") || spinner3.getSelectedItem().toString().equals("Main Course")) {
+                        String selecteddish = spinner3.getSelectedItem().toString().replace(" ", "%20");
+                        searchString2 = searchString2 + "&dishType=" + selecteddish;
+                    } else {
+                        searchString2 = searchString2 + "&dishType=" + spinner3.getSelectedItem().toString();
+                    }
+
+                }
+
+                if (!ingredientMinCalories.getText().toString().matches("") && !ingredientMaxCalories.getText().toString().matches("")) {
+                    searchCalories = "&calories=" + ingredientMinCalories.getText().toString() + "-" + ingredientMaxCalories.getText().toString();
+                    searchString2 = searchString2 + searchCalories;
+                }
+                if (!ingredientMinCalories.getText().toString().matches("") && ingredientMaxCalories.getText().toString().matches("")) {
+                    searchCalories = "&calories=" + ingredientMinCalories.getText().toString();
+                    searchString2 = searchString2 + searchCalories;
+                }
+
+                if (ingredientMinCalories.getText().toString().matches("") && !ingredientMaxCalories.getText().toString().matches("")) {
+                    searchCalories = "&calories=" + ingredientMaxCalories.getText().toString();
+                    searchString2 = searchString2 + searchCalories;
+                }
+
+                if (!ingredientMinTime.getText().toString().matches("") && !ingredientMaxTime.getText().toString().matches("")) {
+                    searchTime = "&time=" + ingredientMinTime.getText().toString() + "-" + ingredientMaxTime.getText().toString();
+                    searchString2 = searchString2 + searchTime;
+                }
+                if (!ingredientMinTime.getText().toString().matches("") && ingredientMaxTime.getText().toString().matches("")) {
+                    searchTime = "&time=" + ingredientMinTime.getText().toString();
+                    searchString2 = searchString2 + searchTime;
+                }
+
+                if (ingredientMinTime.getText().toString().matches("") && !ingredientMaxTime.getText().toString().matches("")) {
+                    searchTime = "&time=" + ingredientMaxTime.getText().toString();
+                    searchString2 = searchString2 + searchTime;
+                }
+                if (ingredientName.getText().toString().matches("")) {
+                    ingredientName.setError("Ingredient name is required");
+                    ingredientName.requestFocus();
+                }
+                else{
+                    bottomSheetDialog.dismiss();
+                    clearLast();
+                    loadRecipies(searchString1, searchString2);
+                    foodLabel.setText("Food based on your search");
+                }
+
+            }
+        });
+
+    }
+
     private void refreshView(String food_type, String s) {
         clearLast();
         foodLabel.setText(food_type);
-        loadRecipies(s);
+        loadRecipies(s, "");
     }
 
 
@@ -275,11 +407,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     @Override
     public void onItemClicked(View view, String name, int calories, String image, String ingredients, String links) {
         //Toast.makeText(this, "Clicked: "+ name + calories + image + ingredients, Toast.LENGTH_SHORT).show();
-        Intent gotoRecipe = new Intent(Home.this,RecipesPage.class);
-        gotoRecipe.putExtra("recipeName",name);
-        gotoRecipe.putExtra("recipeCalories",calories);
-        gotoRecipe.putExtra("recipeImage",image);
-        gotoRecipe.putExtra("recipeIngredients",ingredients);
+        Intent gotoRecipe = new Intent(Home.this, RecipesPage.class);
+        gotoRecipe.putExtra("recipeName", name);
+        gotoRecipe.putExtra("recipeCalories", calories);
+        gotoRecipe.putExtra("recipeImage", image);
+        gotoRecipe.putExtra("recipeIngredients", ingredients);
         gotoRecipe.putExtra("recipeLink", links);
         startActivity(gotoRecipe);
 
