@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,9 @@ import java.util.UUID;
 
 public class RecipesPage extends AppCompatActivity implements View.OnClickListener, RecyclerCallback2 {
 
-    TextView recipeName, recipeCalories, fullrecipe;
+    TextView recipeName, recipeCalories;
     ImageView backButton, favourite, recipePhoto;
+    Button full_recipe;
     private FirebaseAuth mAuth;
     RecyclerView recyclerView;
     boolean isFavourite;
@@ -67,7 +69,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         recipeName = findViewById(R.id.recipeName);
         recipeCalories = findViewById(R.id.recipeCalories);
         recipePhoto = findViewById(R.id.recipePhoto);
-        fullrecipe = findViewById(R.id.full_recipe);
+        full_recipe = findViewById(R.id.full_recipe);
         recipeName.setText(recipe_name);
         recipeCalories.setText("Calories: " + recipe_calories);
         Picasso.get().load(recipe_image).placeholder(R.drawable.defaultfood).fit().into(recipePhoto);
@@ -102,7 +104,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        fullrecipe.setOnClickListener(new View.OnClickListener() {
+        full_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
