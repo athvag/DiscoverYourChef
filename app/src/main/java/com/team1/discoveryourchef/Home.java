@@ -39,6 +39,8 @@ import java.util.List;
 
 public class Home extends AppCompatActivity implements View.OnClickListener, RecyclerCallback {
 
+    String fullName;
+    String email;
     private DrawerLayout drawer;
     TextView welcome;
     List<String> names = new ArrayList<>();
@@ -63,8 +65,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        String fullName = getIntent().getExtras().getString("fullName");
-        String email = getIntent().getExtras().getString("email");
+        fullName = getIntent().getExtras().getString("fullName");
+        email = getIntent().getExtras().getString("email");
         welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome " + fullName);
         profile = findViewById(R.id.account_circle);
@@ -250,16 +252,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 refreshView("Sweets","&dishType=Sweets");
                 break;
             case R.id.account_circle:
-                /*
-                String fullName = getIntent().getExtras().getString("fullName");
-                String email = getIntent().getExtras().getString("email");
-                 */
-                String [] mainActExtra = getIntent().getStringArrayExtra("fnem");
+                //String [] mainActExtra = getIntent().getStringArrayExtra("fnem");
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                 TextView txtProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_username);
                 TextView txtEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_email);
-                txtProfileName.setText(mainActExtra[0]);
-                txtEmail.setText(mainActExtra[1]);
+                txtProfileName.setText(fullName);
+                txtEmail.setText(email);
                 drawer.openDrawer(Gravity.LEFT);
                 break;
         }

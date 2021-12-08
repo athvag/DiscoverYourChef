@@ -52,11 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     DocumentSnapshot document = task.getResult();
-                    login.putExtra("fnem", new String[] {document.getString("fullName"),document.getString("email")});
-                    /*
+                    //login.putExtra("fnem", new String[] {document.getString("fullName"),document.getString("email")});
                     login.putExtra("fullName", document.getString("fullName"));
                     login.putExtra("email", document.getString("email"));
-                     */
+
                     startActivity(login);
                 }
             });
@@ -139,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             DocumentSnapshot document = task.getResult();
                             login.putExtra("fullName", document.getString("fullName"));
+                            login.putExtra("email", document.getString("email"));
                             startActivity(login);
                         }
                     });
