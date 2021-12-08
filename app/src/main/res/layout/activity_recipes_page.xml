@@ -24,13 +24,14 @@
         app:tint="#000000" />
 
     <ImageView
+        android:layout_marginBottom="7dp"
         android:id="@+id/favouritePhoto"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:layout_marginRight="26dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:src="@drawable/notfavourite"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -74,6 +75,7 @@
             app:layout_constraintLeft_toRightOf="@id/recipePhoto">
 
             <TextView
+                android:paddingEnd="8dp"
                 android:id="@+id/recipeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
