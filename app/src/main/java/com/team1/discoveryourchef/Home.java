@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends AppCompatActivity implements View.OnClickListener, RecyclerCallback {
-
+    private NestedScrollView nestedSV;
     String fullName;
     String email;
     DrawerLayout drawer;
@@ -78,6 +79,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
         welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome " + fullName);
         profile = findViewById(R.id.account_circle);
+        nestedSV = findViewById(R.id.idNestedSV);
         //Create the loading window//
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -173,6 +175,17 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         String tempUrl = "";
         dialog.show(); //Show the loading animation
+        nestedSV.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // on scroll change we are checking when users scroll as bottom.
+                if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    loadRecipies(queue,queue2);
+                }
+            }
+        });
 
         tempUrl = "https://api.edamam.com/api/recipes/v2?type=public" + queue + "&app_id=04d3b2e6&app_key=e6bcb688109bd063ca951d0f9f1834ad" +queue2 + "&random=true";//The API call link
 
