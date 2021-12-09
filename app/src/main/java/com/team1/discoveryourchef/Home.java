@@ -41,6 +41,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
     String fullName;
     String email;
+    String passWord;
     private DrawerLayout drawer;
     TextView welcome;
     List<String> names = new ArrayList<>();
@@ -67,6 +68,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         fullName = getIntent().getExtras().getString("fullName");
         email = getIntent().getExtras().getString("email");
+        passWord = getIntent().getExtras().getString("password");
         welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome " + fullName);
         profile = findViewById(R.id.account_circle);
@@ -114,8 +116,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.profile_item:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        Intent j = new Intent(Home.this, UpdateProfile.class);
+                        j.putExtra("FULL_NAME", fullName);
+                        j.putExtra("E_MAIL", email);
+                        j.putExtra("PASS_WORD", passWord);
+                        startActivity(j);
                         break;
                     case R.id.favorites_item:
                         Intent i = new Intent(Home.this, FavoritesPage.class);
@@ -252,7 +257,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 refreshView("Sweets","&dishType=Sweets");
                 break;
             case R.id.account_circle:
-                //String [] mainActExtra = getIntent().getStringArrayExtra("fnem");
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                 TextView txtProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_username);
                 TextView txtEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_email);

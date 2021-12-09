@@ -21,4 +21,14 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="navdrawprofile">Profile</string>
     <string name="navdrawfavorites">Favorites</string>
+    <string name="favoritesString">Favorites</string>
+    <string name="ProfileManString">Profile Manager</string>
+    <string name="updateString">Update password</string>
+    <string name="full_nameString">Full Name</string>
+    <string name="passwordString">Password</string>
+    <string name="e_mail_string">E-mail</string>
+    <string name="backbuttonDescription">BACKBUTTON</string>
+    <string name="DeleteUserString">Delete Account</string>
+    <string name="typenewpass">Type new password</string>
+    <string name="change_passwordString">Change password?</string>
 </resources>

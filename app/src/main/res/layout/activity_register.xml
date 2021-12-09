@@ -27,7 +27,6 @@
         android:layout_width="270dp"
         android:layout_height="50dp"
         android:hint="E-mail"
-
         android:inputType="textEmailAddress"
         android:textColorHint="@android:color/darker_gray"
         android:paddingStart="16dp"

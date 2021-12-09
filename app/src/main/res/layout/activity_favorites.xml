@@ -11,7 +11,7 @@
         android:id="@+id/favorites_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Favorites"
+        android:text="@string/favoritesString"
         app:layout_constraintLeft_toLeftOf="@id/favorites_backButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"

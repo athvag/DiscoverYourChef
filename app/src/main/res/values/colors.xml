@@ -10,4 +10,6 @@
     <color name="primary">#e9b08e</color>
     <color name="secondary"> #dbcdb5</color>
     <color name="navcolor">#dbccb7</color>
+    <color name="textcolorblack">#222222</color>
+    <color name="redalert">#ff0f0f</color>
 </resources>
