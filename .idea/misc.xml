@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/activity_recipes_page.xml" value="0.2726449275362319" />
+        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/holder_recipe_item.xml" value="0.2726449275362319" />
         <entry key="..\:/Users/8omas/AndroidStudioProjects/DiscoverYourChef/app/src/main/res/drawable-mdpi/ic_account_nav.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/8omas/AndroidStudioProjects/DiscoverYourChef/app/src/main/res/drawable-mdpi/ic_account_navdraw.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/8omas/AndroidStudioProjects/DiscoverYourChef/app/src/main/res/drawable-mdpi/ic_favorite_clicked.xml" value="0.24444444444444444" />
