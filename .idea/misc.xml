@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/activity_recipes_page.xml" value="0.2726449275362319" />
-        <entry key="..\:/DiscoverYourChef/app/src/main/res/layout/holder_recipe_item.xml" value="0.2726449275362319" />
         <entry key="..\:/Users/8omas/AndroidStudioProjects/DiscoverYourChef/app/src/main/res/drawable-mdpi/ic_account_nav.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/8omas/AndroidStudioProjects/DiscoverYourChef/app/src/main/res/drawable-mdpi/ic_account_navdraw.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/8omas/AndroidStudioProjects/DiscoverYourChef/app/src/main/res/drawable-mdpi/ic_favorite_clicked.xml" value="0.24444444444444444" />
@@ -37,7 +35,10 @@
         <entry key="..\:/Users/bagel/Desktop/Test/DiscoverYourChef/app/src/main/res/layout/activity_favorites.xml" value="0.33" />
         <entry key="..\:/Users/bagel/Desktop/Test/DiscoverYourChef/app/src/main/res/layout/activity_home.xml" value="0.3078125" />
         <entry key="..\:/Users/bagel/Desktop/Test/DiscoverYourChef/app/src/main/res/layout/activity_recipes_page.xml" value="0.3078125" />
+        <entry key="..\:/Users/bagel/Desktop/Test/DiscoverYourChef/app/src/main/res/layout/activity_register.xml" value="0.1636041263700838" />
         <entry key="..\:/Users/bagel/Desktop/Test/DiscoverYourChef/app/src/main/res/layout/holder_favorites_item.xml" value="0.303125" />
+        <entry key="..\:/Users/bagel/Desktop/Test/DiscoverYourChef/app/src/main/res/layout/holder_recipe_item.xml" value="0.27561475409836067" />
+        <entry key="..\:/Users/bagel/Desktop/Test/DiscoverYourChef/app/src/main/res/layout/search_menu.xml" value="0.1636041263700838" />
       </map>
     </option>
   </component>

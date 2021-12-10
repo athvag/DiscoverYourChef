@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                         case "ERROR_WRONG_PASSWORD":
                             dialog.dismiss();
                             Toast.makeText(MainActivity.this, "The password is invalid or the user does not have a password.", Toast.LENGTH_LONG).show();
-                            loginPassword.setError("password is incorrect ");
+                            loginPassword.setError("Password is incorrect ");
                             loginPassword.requestFocus();
                             loginPassword.setText("");
                             break;

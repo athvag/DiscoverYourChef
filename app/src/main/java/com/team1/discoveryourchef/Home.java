@@ -146,7 +146,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         //Load random pizza recipies//
         loadRecipies("&q=pizza", "");
-
+        //Refresh view when scrolling
         nestedSV.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
