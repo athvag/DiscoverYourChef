@@ -131,6 +131,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                         finish();
                         startActivity(new Intent(Home.this, MainActivity.class ));
                         break;
+                    case R.id.sendmail_item:
+                        Intent k = new Intent(Home.this, SendEmail.class);
+                        startActivity(k);
+                        break;
                 }
                 return false;
             }

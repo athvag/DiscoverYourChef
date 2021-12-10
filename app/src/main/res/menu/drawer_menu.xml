@@ -15,6 +15,9 @@
                 <item android:id="@+id/favorites_item"
                     android:icon="@drawable/ic_favorite_unclicked"
                     android:title="@string/navdrawfavorites"/>
+                <item android:id="@+id/sendmail_item"
+                    android:icon="@drawable/ic_email_item"
+                    android:title="@string/send_feedback_itemString"/>
             </group>
         </menu>
     </item>

@@ -140,6 +140,7 @@
         android:background="@drawable/login_bg"
         android:hint="@string/typenewpass"
         android:inputType="textPassword"
+        android:textColor="@color/textcolorblack"
         android:paddingStart="16dp"
         android:textColorHint="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/update_button"
