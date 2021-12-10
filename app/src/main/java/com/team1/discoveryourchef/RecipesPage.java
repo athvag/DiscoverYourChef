@@ -34,17 +34,11 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     TextView recipeName, recipeCalories;
     ImageView backButton, favourite, recipePhoto;
     Button full_recipe;
-    private FirebaseAuth mAuth;
     RecyclerView recyclerView;
-    boolean isFavourite;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String recipe_name;
+    String recipe_name, recipe_image, recipe_ingredients, recipe_link, uniqueID, recipeID;
     int recipe_calories;
-    String recipe_image;
-    String recipe_ingredients;
-    String recipe_link;
-    String uniqueID;
-    String recipeID;
+    boolean isFavourite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +50,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+        //intent the variables from home page
         recipe_name = getIntent().getExtras().getString("recipeName");
         recipe_calories = getIntent().getExtras().getInt("recipeCalories");
         recipe_image = getIntent().getExtras().getString("recipeImage");
@@ -64,6 +59,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         isFavourite = getIntent().getBooleanExtra("recipeIsFavorite",false);
         recipeID = getIntent().getExtras().getString("recipeID");
 
+        //initialize the variables
         backButton = findViewById(R.id.backButton);
         favourite = findViewById(R.id.favouritePhoto);
         recipeName = findViewById(R.id.recipeName);
@@ -74,6 +70,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         recipeCalories.setText("Calories: " + recipe_calories);
         Picasso.get().load(recipe_image).placeholder(R.drawable.defaultfood).fit().into(recipePhoto);
 
+        //back button
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +85,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
             favourite.setImageDrawable(getResources().getDrawable(R.drawable.favourite));
         }
 
+        //add & remove from favorites
         favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,6 +102,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
             }
         });
 
+        //link for full recipe
         full_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +112,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
             }
         });
 
+        //recyclerView for the ingredients
         recyclerView = findViewById(R.id.recycler_menu2);
 
         List<String> arrayIngredients = new ArrayList<>();
@@ -126,6 +126,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
         recyclerView.setAdapter(adapter2);
     }
 
+    //remove favorite from database
     private void removeFromFirebase() {
         if(recipeID != null){
             db.collection("Favorites").document(recipeID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -147,6 +148,7 @@ public class RecipesPage extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    //add favorite to database
     private void addToFirebase() {
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         uniqueID = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
