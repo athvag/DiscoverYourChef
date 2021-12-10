@@ -58,4 +58,22 @@
     </string-array>
     <string name="navdrawprofile">Profile</string>
     <string name="navdrawfavorites">Favorites</string>
+    <string name="favoritesString">Favorites</string>
+    <string name="ProfileManString">Profile Manager</string>
+    <string name="updateString">Update password</string>
+    <string name="full_nameString">Full Name</string>
+    <string name="passwordString">Password</string>
+    <string name="e_mail_string">E-mail</string>
+    <string name="backbuttonDescription">BACKBUTTON</string>
+    <string name="DeleteUserString">Delete Account</string>
+    <string name="typenewpass">Type new password</string>
+    <string name="change_passwordString">Change password?</string>
+    <string name="send_feedbackString">Send Feedback</string>
+    <string name="send_emailString">Send Email</string>
+    <string name="messageToUserString">Send us Email with feedback for the application or other suggestions you may have</string>
+    <string name="emailsubject">Subject</string>
+    <string name="message_bodyString">Message body</string>
+    <string name="send_feedback_itemString">Send feedback</string>
+    <string name="contactowner">disc_your_chef@hotmail.com</string>
+    <string name="noappforemailsString">No application for sending Ε-Mails found</string>
 </resources>

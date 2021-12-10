@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.cardview.widget.CardView;
-import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +16,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +27,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.android.volley.Response;
 import com.team1.discoveryourchef.Favorites.FavoritesPage;
@@ -44,10 +38,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends AppCompatActivity implements View.OnClickListener, RecyclerCallback {
+
     String fullName;
     String email;
     String lastqueue1, lastqueue2;
     DrawerLayout drawer;
+    String passWord;
     TextView welcome;
     List<String> names = new ArrayList<>();
     List<Integer> calories = new ArrayList<>();
@@ -76,6 +72,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         fullName = getIntent().getExtras().getString("fullName");
         email = getIntent().getExtras().getString("email");
+        passWord = getIntent().getExtras().getString("password");
         welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome " + fullName);
         profile = findViewById(R.id.account_circle);
@@ -95,7 +92,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
 
         recyclerView = findViewById(R.id.recycler_menu);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         //Initiate the clicks on the categories//
         clickItem1 = findViewById(R.id.cat_menu_1);
@@ -127,8 +124,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.profile_item:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        Intent j = new Intent(Home.this, UpdateProfile.class);
+                        j.putExtra("FULL_NAME", fullName);
+                        j.putExtra("E_MAIL", email);
+                        j.putExtra("PASS_WORD", passWord);
+                        startActivity(j);
                         break;
                     case R.id.favorites_item:
                         Intent i = new Intent(Home.this, FavoritesPage.class);
@@ -138,6 +138,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                         FirebaseAuth.getInstance().signOut();
                         finish();
                         startActivity(new Intent(Home.this, MainActivity.class));
+                        break;
+                    case R.id.sendmail_item:
+                        Intent k = new Intent(Home.this, SendEmail.class);
+                        startActivity(k);
                         break;
                 }
                 return false;
@@ -274,10 +278,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Rec
                 start_food_search();
                 break;
             case R.id.account_circle:
-                //String [] mainActExtra = getIntent().getStringArrayExtra("fnem");
-                NavigationView navigationView = findViewById(R.id.nav_view);
-                TextView txtProfileName = navigationView.getHeaderView(0).findViewById(R.id.nav_username);
-                TextView txtEmail = navigationView.getHeaderView(0).findViewById(R.id.nav_email);
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                TextView txtProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_username);
+                TextView txtEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_email);
                 txtProfileName.setText(fullName);
                 txtEmail.setText(email);
                 drawer.openDrawer(Gravity.LEFT);
